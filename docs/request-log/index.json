@@ -26,11 +26,11 @@
 		{
 			"request_id": "REQ-20260515-003",
 			"title": "Fix review findings",
-			"status": "attempted",
+			"status": "completed",
 			"file": "docs/request-log/requests/REQ-20260515-003.md",
 			"opened_at": "2026-05-15T21:20:10Z",
-			"updated_at": "2026-05-15T21:20:10Z",
-			"closed_at": null
+			"updated_at": "2026-05-15T21:21:57Z",
+			"closed_at": "2026-05-15T21:21:57Z"
 		},
 		{
 			"request_id": "REQ-0001",

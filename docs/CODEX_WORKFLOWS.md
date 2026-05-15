@@ -2,6 +2,9 @@
 
 This file defines safe, repeatable change requests for people using Codex CLI without writing code.
 
+For non-technical free-text requests, start from:
+- `docs/NON_TECH_PRODUCT_OWNER_BRIEF.md`
+
 ## Safety rules
 
 1. Never edit generated source snapshot files directly unless the task is content ingestion.
@@ -13,6 +16,7 @@ This file defines safe, repeatable change requests for people using Codex CLI wi
 3. Any SEO/performance-impacting change must update `COMPARISON.md`.
 4. If output is unexpected, revert only the changed files and re-run from a clean request.
 5. For release/deploy requests, enforce `docs/RELEASE_CHECKLIST.md` before sign-off.
+6. Large changes must be committed with Conventional Commit messages in logical, reversible slices.
 
 ## Task recipes
 

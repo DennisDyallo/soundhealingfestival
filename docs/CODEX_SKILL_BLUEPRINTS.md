@@ -67,7 +67,7 @@ Follow this lifecycle every time:
 5. **Compare log**  
    If SEO/performance/content parity changed, update `COMPARISON.md`.
 6. **Commit**  
-   Commit only validated changes with a clear message and attached evidence.
+   Commit only validated changes with a clear message and attached evidence. Use **Conventional Commits**, and split large changes into logical, reversible commits (implementation, tests, docs).
 
 ## 4) Mapping to this repo's scripts/tests/checks
 

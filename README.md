@@ -97,6 +97,7 @@ It must be updated on every relevant change and each new comparison run.
 - `docs/CODEX_WORKFLOWS.md` — safe no-code Codex task recipes
 - `docs/CODEX_SKILL_BLUEPRINTS.md` — reusable Codex skill contracts and lifecycle blueprint
 - `docs/CODEX_AGENT_TEMPLATES.md` — copy-paste agent templates for recurring workflows
+- `docs/NON_TECH_PRODUCT_OWNER_BRIEF.md` — free-text intake brief for non-technical product owners
 - `docs/ROLE_PLAYBOOKS.md` — role-specific operating guides
 - `docs/RELEASE_CHECKLIST.md` — reproducible release, parity, deploy, and rollback gates
 - `docs/RUM_CWV_TRACKING_PLAN.md` — production Core Web Vitals and RUM rollout plan

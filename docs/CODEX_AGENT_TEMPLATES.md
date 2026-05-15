@@ -9,6 +9,12 @@ Use with:
 - `docs/CODEX_SKILL_BLUEPRINTS.md` (contract lifecycle)
 - `COMPARISON.md` (parity and changelog source of truth)
 
+## Commit policy (all templates)
+
+- For large changes, require Conventional Commit messages.
+- Split large work into logical slices (implementation -> tests -> docs) so each commit is reviewable and reversible.
+- Always include validation evidence before commit.
+
 ---
 
 ## 1) Content/Text Updates

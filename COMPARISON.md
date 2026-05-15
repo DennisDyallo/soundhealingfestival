@@ -43,6 +43,7 @@ Minimum required updates per pass:
 | Styleguide workflow | Wix editor-centric | Source-controlled `/styleguide` + token file | ✅ Added | Supports developer/UX collaboration in codebase |
 | No-code Codex workflow docs | Not defined | Task recipes + safety rails + role playbooks | ✅ Added | `docs/CODEX_WORKFLOWS.md` and `docs/ROLE_PLAYBOOKS.md` |
 | Reproducible carbon-copy governance docs | Not defined | Project map + ADR-lite + release checklist + Codex templates + RUM plan | ✅ Added | Creates reusable workflow trail for future carbon-copy projects |
+| Non-tech request intake + commit discipline | Not defined | Product-owner free-text brief + mandatory conventional commit slicing for large changes | ✅ Added | Reduces ambiguity for AI execution and improves revertability/supportability |
 
 ## Maturity Snapshot
 
@@ -176,6 +177,7 @@ You get **more control**, **faster updates**, and **lower ongoing dependency** o
 | 2026-05-15 | Onboarding + test + styleguide scaffolding foundation | `README.md`, `CONTRIBUTING.md`, `docs/*`, `.github/workflows/ci.yml`, `package.json`, `src/routes/styleguide/+page.svelte`, `static/design-tokens.css`, `tests/e2e/home.spec.ts`, `scripts/scripts-smoke.test.ts` | Improves delivery reliability and change safety; minor JS payload increase from new styleguide route | ✅ |
 | 2026-05-15 | Scroll motion reveal parity fix for hidden lineup block | `src/routes/+page.svelte`, `tests/e2e/home.spec.ts`, `COMPARISON.md` | No metadata impact; restores visibility parity for lineup/animated content | ✅ |
 | 2026-05-15 | Workflow governance + reusable Codex execution framework | `docs/project-map/*`, `docs/adr-lite/*`, `docs/RELEASE_CHECKLIST.md`, `docs/CODEX_SKILL_BLUEPRINTS.md`, `docs/CODEX_AGENT_TEMPLATES.md`, `docs/RUM_CWV_TRACKING_PLAN.md`, `README.md`, `CONTRIBUTING.md`, `docs/CODEX_WORKFLOWS.md`, `docs/ROLE_PLAYBOOKS.md` | No direct SEO change; strengthens reproducible delivery and auditability | ✅ |
+| 2026-05-15 | Non-tech product-owner request hardening + conventional commit policy | `docs/NON_TECH_PRODUCT_OWNER_BRIEF.md`, `docs/CODEX_WORKFLOWS.md`, `docs/CODEX_SKILL_BLUEPRINTS.md`, `docs/CODEX_AGENT_TEMPLATES.md`, `CONTRIBUTING.md`, `README.md`, `COMPARISON.md` | No direct SEO change; improves requirement clarity and rollback-friendly commit trail | ✅ |
 
 ## Comparison Runs
 
@@ -190,3 +192,4 @@ You get **more control**, **faster updates**, and **lower ongoing dependency** o
 | 2026-05-15 | Onboarding scaffolding validation run | Lint + typecheck + unit + build + smoke + e2e + enforced budgets | HTML 464,451 B, JS refs 8, JS bytes 101,526 B, largest image 518,561 B; all thresholds still passing | Track future payload drift as onboarding surface grows |
 | 2026-05-15 | Live vs local scroll-state lineup diagnostics | Playwright DOM/computed-style comparison across scroll fractions | Local lineup block stayed `opacity:0` while live transitioned to visible after scroll; fixed by viewport-driven `data-motion-enter=\"done\"` marking | Keep e2e guard for lineup visibility to prevent regressions |
 | 2026-05-15 | Workflow governance completeness sweep | Documentation parity audit against repo docs and workflow artifacts | Confirmed reproducible workflow docs in place; README + comparison ledger refreshed for future carbon-copy reuse | Keep docs synchronized whenever workflow assets change |
+| 2026-05-15 | Non-tech request protocol completeness sweep | Documentation audit against non-technical product-owner usage model | Added free-text intake brief, explicit safety/escalation triggers, and conventional-commit slicing rule for large changes | Keep this protocol aligned with real support incidents and update templates accordingly |

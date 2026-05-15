@@ -57,3 +57,9 @@ Any performance, SEO, UX, or payload-affecting change must update `COMPARISON.md
 ## 7. Release and rollback discipline
 
 Use `docs/RELEASE_CHECKLIST.md` for release-candidate validation, parity checks, deploy verification, and rollback readiness.
+
+## 8. Commit discipline
+
+- Use **Conventional Commits** (`feat:`, `fix:`, `test:`, `docs:`, `chore:`).
+- For large changes, split commits into logical/reversible slices.
+- Keep each commit independently reviewable with clear scope.

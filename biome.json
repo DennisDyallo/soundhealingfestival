@@ -27,7 +27,11 @@
 			"!.svelte-kit",
 			"!node_modules",
 			"!src/lib/content/wix.css",
+			"!static/wix.css",
 			"!src/lib/content/home.html",
+			"!src/lib/content/seo.ts",
+			"!test-results",
+			"!playwright-report",
 			"!Sound Healing Evening Stockholm Sweden, 15 Februar 2026_files",
 			"!Sound Healing Evening Stockholm Sweden, 15 Februar 2026.html"
 		]

@@ -4,17 +4,30 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
+		"setup": "npm run migrate:source && npm run check",
 		"dev": "vite dev",
+		"dev:host": "vite dev --host 0.0.0.0",
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"migrate:source": "node ./scripts/migrate-snapshot.mjs",
+		"perf:budget": "node ./scripts/perf-budget.mjs",
+		"perf:budget:enforce": "node ./scripts/perf-budget.mjs --enforce",
 		"format": "biome format --write .",
 		"lint": "biome check .",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"test": "npm run test:unit",
+		"test:unit": "vitest run src",
+		"test:watch": "vitest src",
+		"test:smoke": "vitest run scripts/scripts-smoke.test.ts",
+		"test:e2e": "playwright test",
+		"test:visual": "playwright test -c playwright.visual.config.ts",
+		"test:visual:update": "playwright test -c playwright.visual.config.ts --update-snapshots",
+		"ci:check": "npm run lint && npm run check && npm run test:unit && npm run build && npm run test:smoke && npm run perf:budget:enforce"
 	},
 	"devDependencies": {
+		"@playwright/test": "^1.56.1",
 		"@biomejs/biome": "^2.4.15",
 		"@sveltejs/adapter-static": "^3.0.10",
 		"@sveltejs/kit": "^2.57.0",
@@ -24,6 +37,7 @@
 		"svelte": "^5.55.2",
 		"svelte-check": "^4.4.6",
 		"typescript": "^6.0.2",
-		"vite": "^8.0.7"
+		"vite": "^8.0.7",
+		"vitest": "^3.2.4"
 	}
 }

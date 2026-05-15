@@ -21,3 +21,19 @@ test("styleguide page is accessible", async ({ page }) => {
 		page.getByRole("heading", { name: "Project Styleguide" }),
 	).toBeVisible();
 });
+
+test("lineup text is revealed when scrolling", async ({ page }) => {
+	await page.goto("/");
+
+	const lineupList = page.locator("#comp-jkkuo5n0");
+	await lineupList.scrollIntoViewIfNeeded();
+	await expect(lineupList).toContainText("Daniel Reid/");
+	await expect
+		.poll(async () => lineupList.getAttribute("data-motion-enter"))
+		.toBe("done");
+
+	const opacity = await lineupList.evaluate((element) =>
+		Number(getComputedStyle(element).opacity),
+	);
+	expect(opacity).toBeGreaterThan(0.6);
+});

@@ -37,6 +37,7 @@ Minimum required updates per pass:
 | CSS delivery strategy | In-page style-heavy runtime output | Static stylesheet delivery (`/wix.css`) | ✅ Improved | Better cacheability and smaller HTML payload |
 | Content delivery strategy | Runtime-generated Wix DOM payload | Server-side file load + prerender output | ✅ Improved | Avoids shipping large raw HTML string in client bundle |
 | Performance budget workflow | Not defined | Scripted + enforceable budgets | ✅ Added | `scripts/perf-budget.mjs` + npm scripts provide repeatable budget checks |
+| Scroll-triggered lineup reveal | Wix runtime reveals lineup text on scroll | Svelte route now marks motion blocks as entered when intersecting viewport | ✅ Parity restored | Prevents hidden artist lineup caused by paused Wix motion states |
 | Automated testing workflow | Not defined | Unit + smoke + browser e2e checks | ✅ Added | `vitest` + `playwright` scripts now scaffolded |
 | CI quality gates | Not defined | GitHub Actions workflow for validation + e2e | ✅ Added | `.github/workflows/ci.yml` enforces onboarding-safe checks |
 | Styleguide workflow | Wix editor-centric | Source-controlled `/styleguide` + token file | ✅ Added | Supports developer/UX collaboration in codebase |
@@ -172,6 +173,7 @@ You get **more control**, **faster updates**, and **lower ongoing dependency** o
 | 2026-05-15 | Added repeatable performance budget script + thresholds | `scripts/perf-budget.mjs`, `package.json`, `README.md`, `COMPARISON.md` | No direct SEO change; adds payload regression guardrail workflow | ✅ |
 | 2026-05-15 | Fleet optimization wave (content + CSS + image delivery) | `src/routes/+page.server.ts`, `src/routes/+page.svelte`, `src/routes/+layout.svelte`, `scripts/migrate-snapshot.mjs`, `static/wix.css`, `src/lib/content/home.html` | Significant payload/latency improvement with strict visual parity | ✅ |
 | 2026-05-15 | Onboarding + test + styleguide scaffolding foundation | `README.md`, `CONTRIBUTING.md`, `docs/*`, `.github/workflows/ci.yml`, `package.json`, `src/routes/styleguide/+page.svelte`, `static/design-tokens.css`, `tests/e2e/home.spec.ts`, `scripts/scripts-smoke.test.ts` | Improves delivery reliability and change safety; minor JS payload increase from new styleguide route | ✅ |
+| 2026-05-15 | Scroll motion reveal parity fix for hidden lineup block | `src/routes/+page.svelte`, `tests/e2e/home.spec.ts`, `COMPARISON.md` | No metadata impact; restores visibility parity for lineup/animated content | ✅ |
 
 ## Comparison Runs
 
@@ -184,3 +186,4 @@ You get **more control**, **faster updates**, and **lower ongoing dependency** o
 | 2026-05-15 | Fair old-vs-new payload recomparison | Artifact-level comparison with extension-clean old baseline | HTML -16.6%, referenced JS files -52.9%, referenced JS bytes -61.4% | Use this as the canonical baseline going forward |
 | 2026-05-15 | Performance budget script run (`perf:budget`) | Artifact-level script (`scripts/perf-budget.mjs`) against latest `build/` output | HTML 464,394 B, JS refs 8, JS bytes 80,465 B, largest image 518,561 B; all thresholds passing | Keep budgets updated after each optimization pass |
 | 2026-05-15 | Onboarding scaffolding validation run | Lint + typecheck + unit + build + smoke + e2e + enforced budgets | HTML 464,451 B, JS refs 8, JS bytes 101,526 B, largest image 518,561 B; all thresholds still passing | Track future payload drift as onboarding surface grows |
+| 2026-05-15 | Live vs local scroll-state lineup diagnostics | Playwright DOM/computed-style comparison across scroll fractions | Local lineup block stayed `opacity:0` while live transitioned to visible after scroll; fixed by viewport-driven `data-motion-enter=\"done\"` marking | Keep e2e guard for lineup visibility to prevent regressions |

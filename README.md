@@ -2,6 +2,18 @@
 
 This project migrates the saved Wix snapshot into a static SvelteKit site while stripping runtime artifacts from the source export.
 
+## Quick start
+
+```sh
+npm install
+npm run setup
+npm run dev
+```
+
+- `npm run dev` starts local dev with HMR.
+- `npm run dev:host` exposes dev server on local network.
+- `npm run setup` regenerates migrated content and checks Svelte/TS diagnostics.
+
 ## Source inputs
 
 - `Sound Healing Evening Stockholm Sweden, 15 Februar 2026.html`
@@ -22,20 +34,52 @@ npm run migrate:source
 4. Extracts key SEO tags into `src/lib/content/seo.ts`.
 5. Copies only media assets (images/icons) into `static/assets/`.
 
-## Development
+## Styleguide
 
-```sh
-npm run dev
-```
+- Route: `/styleguide`
+- Global tokens: `static/design-tokens.css`
+- Purpose: shared visual language for developer + UX collaboration.
 
-## Quality checks
+## Testing and quality checks
 
 ```sh
 npm run format
 npm run lint
 npm run check
+npm run test:unit
 npm run build
+npm run test:smoke
+npm run test:e2e
+npm run test:visual
 ```
+
+Visual tests are intentionally separate from `npm run test:e2e` (and current CI) to keep the default workflow stable across environments.
+
+When visual baselines should change, update snapshots explicitly:
+
+```sh
+npm run test:visual:update
+```
+
+## Performance budget workflow
+
+Use this after each optimization pass:
+
+```sh
+npm run build
+npm run perf:budget
+```
+
+- `npm run perf:budget` prints old-vs-new artifact metrics and budget status.
+- `npm run perf:budget:enforce` does the same check but exits non-zero if any budget is exceeded.
+
+## CI-ready validation
+
+```sh
+npm run ci:check
+```
+
+This runs lint, type checks, unit tests, build, script smoke tests, and budget enforcement.
 
 ## Build output
 
@@ -45,3 +89,10 @@ The project uses `@sveltejs/adapter-static` and prerendering for a static deploy
 
 Use `COMPARISON.md` as the single source of truth for old-vs-new parity.  
 It must be updated on every relevant change and each new comparison run.
+
+## Contributor docs
+
+- `CONTRIBUTING.md` — onboarding and contribution workflow
+- `docs/ARCHITECTURE.md` — codebase map and data flow
+- `docs/CODEX_WORKFLOWS.md` — safe no-code Codex task recipes
+- `docs/ROLE_PLAYBOOKS.md` — role-specific operating guides

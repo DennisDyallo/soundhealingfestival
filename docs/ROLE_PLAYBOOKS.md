@@ -4,6 +4,7 @@ Use `docs/CODEX_SKILL_BLUEPRINTS.md` as the operational contract. This page is t
 
 ## Non-technical owner (request + approval)
 
+0. Use `docs/NON_TECH_OPERATOR_ONE_PAGER.md` as your daily operating sheet.
 1. Pick a recipe in `docs/CODEX_WORKFLOWS.md`.
 2. Submit exact goal, text/assets, and success criteria.
 3. Require validation output from `npm run lint && npm run check`.

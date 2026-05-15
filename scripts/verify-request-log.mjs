@@ -2,6 +2,7 @@ import { execSync } from "node:child_process";
 import process from "node:process";
 
 const GUARDED_PATTERNS = Object.freeze({
+	codex: /^\.codex\//,
 	src: /^src\//,
 	static: /^static\//,
 	scripts: /^scripts\//,
@@ -39,6 +40,7 @@ const changedFiles = [...new Set([...trackedChanges, ...untrackedChanges])];
 
 const guardedChanges = changedFiles.filter(
 	(filePath) =>
+		GUARDED_PATTERNS.codex.test(filePath) ||
 		GUARDED_PATTERNS.src.test(filePath) ||
 		GUARDED_PATTERNS.static.test(filePath) ||
 		GUARDED_PATTERNS.scripts.test(filePath) ||
@@ -48,7 +50,7 @@ const guardedChanges = changedFiles.filter(
 
 if (guardedChanges.length === 0) {
 	console.log(
-		"✅ request-log guardrail: no guarded changes detected (src/, static/, scripts/, docs/*.md).",
+		"✅ request-log guardrail: no guarded changes detected (.codex/, src/, static/, scripts/, docs/*.md).",
 	);
 	process.exit(0);
 }

@@ -24,6 +24,15 @@
 			"closed_at": "2026-05-15T20:56:59Z"
 		},
 		{
+			"request_id": "REQ-20260515-003",
+			"title": "Fix review findings",
+			"status": "attempted",
+			"file": "docs/request-log/requests/REQ-20260515-003.md",
+			"opened_at": "2026-05-15T21:20:10Z",
+			"updated_at": "2026-05-15T21:20:10Z",
+			"closed_at": null
+		},
+		{
 			"request_id": "REQ-0001",
 			"title": "Sample request",
 			"status": "attempted",

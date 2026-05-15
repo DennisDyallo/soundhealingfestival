@@ -1,0 +1,18 @@
+{
+	"version": 1,
+	"title": "Request Log Index",
+	"location": "docs/request-log",
+	"schema": "docs/request-log/schema.json",
+	"requestsPath": "docs/request-log/requests",
+	"records": [
+		{
+			"request_id": "REQ-0001",
+			"title": "Sample request",
+			"status": "attempted",
+			"file": "docs/request-log/requests/sample-request.md",
+			"opened_at": "YYYY-MM-DDTHH:MM:SSZ",
+			"updated_at": "YYYY-MM-DDTHH:MM:SSZ",
+			"closed_at": null
+		}
+	]
+}

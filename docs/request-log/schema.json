@@ -1,0 +1,103 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "docs/request-log/schema.json",
+	"title": "Request Log Entry",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"request_id",
+		"requested_by_role",
+		"request_text_verbatim",
+		"must_not_change",
+		"assumptions",
+		"scope_targets",
+		"status",
+		"checks_run",
+		"commits",
+		"rollback_reference",
+		"escalation_notes",
+		"timestamps"
+	],
+	"properties": {
+		"request_id": {
+			"type": "string",
+			"minLength": 1
+		},
+		"requested_by_role": {
+			"type": "string",
+			"minLength": 1
+		},
+		"request_text_verbatim": {
+			"type": "string",
+			"minLength": 1
+		},
+		"must_not_change": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"assumptions": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"scope_targets": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"status": {
+			"type": "string",
+			"enum": ["attempted", "completed", "blocked", "reverted"]
+		},
+		"checks_run": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"commits": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"rollback_reference": {
+			"type": ["string", "null"]
+		},
+		"escalation_notes": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"timestamps": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["opened_at", "updated_at", "closed_at"],
+			"properties": {
+				"opened_at": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"updated_at": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"closed_at": {
+					"type": ["string", "null"],
+					"format": "date-time"
+				}
+			}
+		}
+	}
+}

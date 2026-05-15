@@ -9,6 +9,7 @@ Use this checklist for this repo and future carbon-copy projects to keep release
 - [ ] New candidate artifact is identified (`build/index.html` + relevant assets).
 - [ ] Release window, owner, and rollback owner are named.
 - [ ] Risk level is declared (low/medium/high) and protected-area impact is noted.
+- [ ] Request log entry exists (`docs/request-log/requests/REQ-XXXX.md`) and starts with status `attempted`.
 
 ## 2) Validation gates (must pass)
 
@@ -18,6 +19,7 @@ Run gates in this order and capture pass/fail output in the release notes/PR:
 | --- | --- | --- |
 | Lint | `npm run lint` | No lint errors |
 | Type/Svelte check | `npm run check` | 0 errors, 0 warnings |
+| Request-log guardrail | `npm run request-log:verify` | Guarded changes include request-log update |
 | Unit | `npm run test:unit` | All tests passing |
 | Script smoke | `npm run test:smoke` | Smoke checks passing |
 | E2E | `npm run test:e2e` | Critical browser flows passing |
@@ -25,6 +27,7 @@ Run gates in this order and capture pass/fail output in the release notes/PR:
 | Perf budget | `npm run build && npm run perf:budget:enforce` | All budget thresholds passing |
 
 > Minimum owner-approval evidence remains `npm run lint && npm run check`.
+> Record the executed checks in request-log `checks_run` before release sign-off.
 
 ## 3) Parity checks against original
 
@@ -68,8 +71,16 @@ If no parity-impacting deltas occurred, note that explicitly in release notes.
 - [ ] Verify rollback site health (page load + critical sections + metadata).
 - [ ] Re-run `npm run lint && npm run check` locally on rollback branch/commit if code changed.
 - [ ] Document rollback reason, timestamp, and follow-up actions.
+- [ ] Update request log status to `reverted` and set rollback reference.
 
-## 7) Carbon-copy project reuse notes
+## 7) Request-log closeout (required)
+
+- [ ] Final request status is updated to `completed`, `blocked`, or `reverted`.
+- [ ] Request log includes checks run, commit references, and rollback reference (or explicit `null` reason).
+- [ ] If validation/deploy is blocked, status is `blocked` with escalation notes.
+- [ ] Large-change commits are Conventional Commits and include request-id reference.
+
+## 8) Carbon-copy project reuse notes
 
 For cloned projects, keep this file unchanged except for project-specific artifact paths and environment names. Pair with:
 

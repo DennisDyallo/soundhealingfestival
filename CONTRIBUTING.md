@@ -24,6 +24,7 @@ npm run dev
 ```sh
 npm run lint
 npm run check
+npm run request-log:verify
 npm run test:unit
 npm run build
 npm run test:smoke
@@ -34,7 +35,14 @@ npm run perf:budget:enforce
 
 - Fullstack dev: `docs/ARCHITECTURE.md`
 - UX designer: `/styleguide` + `docs/ROLE_PLAYBOOKS.md`
-- Codex operator / non-technical owner: `docs/CODEX_WORKFLOWS.md`
+- Codex operator / non-technical owner: `docs/CODEX_WORKFLOWS.md` (default workflow below)
+
+### Non-technical request-log workflow (default)
+
+- `docs/request-log/index.json` — request registry
+- `docs/request-log/schema.json` — required request structure
+- `docs/request-log/templates/*` — intake and update templates
+- `docs/request-log/requests/*` — request files (`REQ-XXXX.md`)
 
 ## 5. Visual regression workflow
 

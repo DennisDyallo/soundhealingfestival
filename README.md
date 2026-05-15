@@ -92,6 +92,11 @@ It must be updated on every relevant change and each new comparison run.
 
 ## Contributor docs
 
+- **Default for non-technical change requests (request-log workflow):**
+  - `docs/request-log/index.json` — registry of request entries
+  - `docs/request-log/schema.json` — request entry schema
+  - `docs/request-log/templates/*` — intake and handoff templates
+  - `docs/request-log/requests/*` — committed request records
 - `CONTRIBUTING.md` — onboarding and contribution workflow
 - `docs/ARCHITECTURE.md` — codebase map and data flow
 - `docs/CODEX_WORKFLOWS.md` — safe no-code Codex task recipes

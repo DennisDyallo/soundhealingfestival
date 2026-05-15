@@ -27,8 +27,11 @@ Done means:
 - Run checks:
   - `npm run lint && npm run check`
   - plus task checks (`build`, `test:e2e`, `test:visual`, `perf:budget:enforce`) when relevant.
+- Create request log entry at task start with status `attempted`.
+- Update request log status at finish to `completed`, `blocked`, or `reverted`.
+- Record checks run, commit refs, and rollback reference in the request log closeout.
 - Update `COMPARISON.md` when SEO/performance/parity-visible behavior changes.
-- Commit large changes using **Conventional Commits** in logical slices.
+- Commit large changes using **Conventional Commits** in logical slices and include the request-id reference (for example `[REQ-0042]`).
 
 ## 4) Approval checklist (you)
 
@@ -36,6 +39,7 @@ Done means:
 - “Must not change” constraints were respected.
 - Validation output was provided.
 - Changed files look scoped to your request.
+- Request log shows final status and includes checks, commits, and rollback reference.
 - If large change: multiple clear commits were created.
 
 ## 5) Escalate to human fullstack developer when
@@ -50,6 +54,7 @@ Done means:
 - Ask AI for the exact commit hash to revert.
 - Revert the minimal commit first.
 - Re-run `npm run lint && npm run check` and confirm page behavior.
+- Update the request log to `reverted` and add the rollback reference used.
 
 ## 7) Where to find the full system
 

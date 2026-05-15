@@ -11,9 +11,16 @@ Use with:
 
 ## Commit policy (all templates)
 
-- For large changes, require Conventional Commit messages.
+- For large changes, require Conventional Commit messages with a request-id reference (for example `[REQ-0042]`).
 - Split large work into logical slices (implementation -> tests -> docs) so each commit is reviewable and reversible.
 - Always include validation evidence before commit.
+
+## Request-log policy (all templates)
+
+- At task start, create/update the request log entry in `docs/request-log/requests/REQ-XXXX.md` with `status: "attempted"`.
+- At task finish, set `status` to `completed`, `blocked`, or `reverted`.
+- Closeout must include checks run, commit references, and rollback reference (or explicit `null` reason).
+- Include the request-id in large-change Conventional Commit messages.
 
 ---
 
@@ -38,6 +45,7 @@ Return:
 - short diff summary
 - validation results
 - whether COMPARISON.md needed an update
+- request-log closeout (`REQ-XXXX`, final status, checks, commits, rollback reference)
 ```
 
 **Required inputs**
@@ -97,6 +105,7 @@ Return:
 - affected files
 - COMPARISON.md matrix/changelog updates
 - validation results
+- request-log closeout (`REQ-XXXX`, final status, checks, commits, rollback reference)
 ```
 
 **Required inputs**
@@ -154,6 +163,7 @@ Return:
 - exact fix
 - before/after evidence from tests
 - files changed
+- request-log closeout (`REQ-XXXX`, final status, checks, commits, rollback reference)
 ```
 
 **Required inputs**
@@ -211,6 +221,7 @@ Return:
 - old vs new metrics
 - budget status
 - COMPARISON.md updates
+- request-log closeout (`REQ-XXXX`, final status, checks, commits, rollback reference)
 ```
 
 **Required inputs**
@@ -270,6 +281,7 @@ Return:
 - exact COMPARISON.md sections updated
 - metrics inserted
 - consistency check against current build output
+- request-log closeout (`REQ-XXXX`, final status, checks, commits, rollback reference)
 ```
 
 **Required inputs**
@@ -325,6 +337,7 @@ Return:
 - final changed file list
 - concise commit message suggestion
 - release-readiness verdict
+- request-log closeout (`REQ-XXXX`, final status, checks, commits, rollback reference)
 ```
 
 **Required inputs**

@@ -2,7 +2,13 @@
 
 This file defines safe, repeatable change requests for people using Codex CLI without writing code.
 
-For non-technical free-text requests, start from:
+Default for non-technical change requests:
+- `docs/request-log/templates/*` (start from `intake.md`; use others for updates/handoffs)
+- `docs/request-log/schema.json` (required fields/status lifecycle)
+- `docs/request-log/requests/*` (store each `REQ-XXXX.md`)
+- `docs/request-log/index.json` (request registry)
+
+If the request is still rough, draft it first in:
 - `docs/NON_TECH_PRODUCT_OWNER_BRIEF.md`
 
 ## Safety rules
@@ -16,7 +22,10 @@ For non-technical free-text requests, start from:
 3. Any SEO/performance-impacting change must update `COMPARISON.md`.
 4. If output is unexpected, revert only the changed files and re-run from a clean request.
 5. For release/deploy requests, enforce `docs/RELEASE_CHECKLIST.md` before sign-off.
-6. Large changes must be committed with Conventional Commit messages in logical, reversible slices.
+6. At task start, create a request log entry in `docs/request-log/requests/` with `status: "attempted"`.
+7. At task finish, update request log status to `completed`, `blocked`, or `reverted`.
+8. Every request log closeout must include checks run, commit references, and rollback reference (or `null` with reason).
+9. Large changes must be committed with Conventional Commit messages in logical, reversible slices, and each message must include the request-id reference (for example `[REQ-0042]`).
 
 ## Task recipes
 

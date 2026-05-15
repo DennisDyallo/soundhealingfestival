@@ -8,8 +8,8 @@ Operational blueprint for reusing Codex workflows in this repo and future carbon
 | --- | --- | --- | --- | --- |
 | Owner (non-technical) | **Request Framing + Approval** | business goal, exact copy/image, priority, deadline | approved request brief, sign-off decision | `npm run lint && npm run check` must be green before approval |
 | UX designer | **UX Spec + Visual QA** | route, style intent, component/token references, expected visual result | UX change brief, visual acceptance notes, styleguide impact | `npm run lint && npm run check`; run visual confirmation in `npm run dev` |
-| Fullstack developer | **Implementation + Technical QA** | scoped plan, files to change, constraints, rollback note | code/doc changes, validation output, updated comparison log when required | `npm run lint && npm run check`; add targeted tests/checks as needed (`test:unit`, `build`, `perf:budget:enforce`) |
-| Release manager | **Gatekeeping + Release Readiness** | change summary, risk level, validation evidence, affected protected areas | release decision, rollout/rollback note, completed `docs/RELEASE_CHECKLIST.md` | at minimum `npm run ci:check` for release candidates; verify `COMPARISON.md` when SEO/perf changed |
+| Fullstack developer | **Implementation + Technical QA** | scoped plan, files to change, constraints, rollback note, request-id | code/doc changes, validation output, request-log lifecycle update (`attempted -> completed/blocked/reverted`), updated comparison log when required | `npm run lint && npm run check`; add targeted tests/checks as needed (`test:unit`, `build`, `perf:budget:enforce`) |
+| Release manager | **Gatekeeping + Release Readiness** | change summary, risk level, validation evidence, affected protected areas, request-id | release decision, rollout/rollback note, request-log closeout review (checks/commit refs/rollback ref), completed `docs/RELEASE_CHECKLIST.md` | at minimum `npm run ci:check` for release candidates; verify `COMPARISON.md` when SEO/perf changed |
 
 ### Role handoff protocol
 
@@ -41,14 +41,27 @@ skill_contract:
       - "<what changed for users>"
     evidence:
       - "<command output summary>"
+    request_log:
+      request_id: "REQ-XXXX"
+      file: "docs/request-log/requests/REQ-XXXX.md"
+      status_at_start: "attempted"
+      status_at_finish: "<completed|blocked|reverted>"
+      checks_run:
+        - "npm run lint"
+        - "npm run check"
+      commits:
+        - "<commit-sha-or-none>"
+      rollback_reference: "<sha|tag|incident-id|null>"
   acceptance_checks:
     - "npm run lint && npm run check"
     - "<extra checks if feature/risk requires them>"
   safety_rails:
+    - "Create the request log entry at task start with status attempted."
     - "Do not modify generated snapshot inputs unless task is content ingestion."
     - "Do not edit unrelated files."
     - "Update COMPARISON.md when SEO/perf-visible behavior changes."
     - "Escalate protected-area changes for review."
+    - "Close request log with completed/blocked/reverted and include checks, commit refs, and rollback reference."
   done_definition: "<all acceptance checks pass and outputs are documented>"
 ```
 
@@ -57,7 +70,7 @@ skill_contract:
 Follow this lifecycle every time:
 
 1. **Request**  
-   Capture a one-task brief using the contract schema above.
+   Capture a one-task brief using the contract schema above and open a request log entry with `status: "attempted"`.
 2. **Plan**  
    List exact files, commands, acceptance checks, and rollback path.
 3. **Implement**  
@@ -67,13 +80,16 @@ Follow this lifecycle every time:
 5. **Compare log**  
    If SEO/performance/content parity changed, update `COMPARISON.md`.
 6. **Commit**  
-   Commit only validated changes with a clear message and attached evidence. Use **Conventional Commits**, and split large changes into logical, reversible commits (implementation, tests, docs).
+   Commit only validated changes with a clear message and attached evidence. Use **Conventional Commits**, and split large changes into logical, reversible commits (implementation, tests, docs). Large-change commits must include the request-id reference (for example `[REQ-0042]`).
+7. **Request log closeout**  
+   Set final request status to `completed`, `blocked`, or `reverted`, and ensure checks run, commit references, and rollback reference are recorded.
 
 ## 4) Mapping to this repo's scripts/tests/checks
 
 | Lifecycle stage | Repo command/check | Use when | Pass criteria |
 | --- | --- | --- | --- |
 | Plan baseline | `npm run setup` | local onboarding or refreshed source migration needed | migration + `check` succeed |
+| Request log open | `docs/request-log/requests/REQ-XXXX.md` | before first code/doc edit | request record exists and status is `attempted` |
 | Validate (mandatory) | `npm run lint && npm run check` | every Codex task | no lint or Svelte/TS diagnostics |
 | Feature validation | `npm run test:unit` | logic or component behavior changed | all unit tests pass |
 | Build validation | `npm run build` | layout/content/rendering changes | static build succeeds |
@@ -81,6 +97,7 @@ Follow this lifecycle every time:
 | Perf gate | `npm run perf:budget:enforce` | asset, CSS, or rendering payload changes | no budget exceeded |
 | Release gate | `npm run ci:check` | release-ready validation | all CI checks pass |
 | Compare logging | `COMPARISON.md` update | SEO/perf parity-impacting changes | comparison row updated with current run |
+| Request log closeout | `docs/request-log/requests/REQ-XXXX.md` update | task handoff or stop condition | status is `completed/blocked/reverted` with checks/commit refs/rollback reference |
 
 ## 5) Protected areas and safety rails
 

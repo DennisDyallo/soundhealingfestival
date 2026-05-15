@@ -1,7 +1,10 @@
 # Non-Technical Product Owner Brief
 
-Use this when requesting website changes in free text.  
-The AI team should translate this into an implementation contract before coding.
+Use this when drafting website changes in free text.  
+Default execution workflow is the request log:
+- `docs/request-log/templates/*` (start with `intake.md`)
+- `docs/request-log/requests/*` (live request records)
+- `docs/request-log/index.json` + `docs/request-log/schema.json` (registry + structure)
 
 ## 1) Request template (copy/paste)
 
@@ -46,7 +49,9 @@ Definition of done: CTA has stronger contrast and visual hierarchy; visual/e2e c
    - `npm run lint && npm run check`
    - plus task-specific gates (`build`, `test:e2e`, `test:visual`, `perf:budget:enforce`).
 4. Update `COMPARISON.md` when SEO/performance/parity-visible behavior changes.
-5. Commit large changes using **Conventional Commits** with clear scope.
+5. Create a request log entry at task start (`docs/request-log/requests/REQ-XXXX.md`) with status `attempted`.
+6. At task finish, update request status to `completed`, `blocked`, or `reverted`, including checks run, commit refs, and rollback reference.
+7. Commit large changes using **Conventional Commits** with clear scope and include the request-id reference (for example `[REQ-0042]`).
 
 ## 4) “Do not proceed” triggers
 
@@ -64,5 +69,7 @@ For any non-trivial change, commit in logical slices with this pattern:
 1. `feat|fix(scope): <what changed>`
 2. `test(scope): <coverage added>`
 3. `docs(scope): <workflow or comparison updates>`
+
+Each large-change commit must include the same request-id reference (for example `[REQ-0042]`).
 
 Each commit should be independently reviewable and reversible.

@@ -95,4 +95,6 @@ It must be updated on every relevant change and each new comparison run.
 - `CONTRIBUTING.md` — onboarding and contribution workflow
 - `docs/ARCHITECTURE.md` — codebase map and data flow
 - `docs/CODEX_WORKFLOWS.md` — safe no-code Codex task recipes
+- `docs/CODEX_SKILL_BLUEPRINTS.md` — reusable Codex skill contracts and lifecycle blueprint
 - `docs/ROLE_PLAYBOOKS.md` — role-specific operating guides
+- `docs/RELEASE_CHECKLIST.md` — reproducible release, parity, deploy, and rollback gates

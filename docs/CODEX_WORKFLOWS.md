@@ -12,6 +12,7 @@ This file defines safe, repeatable change requests for people using Codex CLI wi
    - `npm run perf:budget:enforce`
 3. Any SEO/performance-impacting change must update `COMPARISON.md`.
 4. If output is unexpected, revert only the changed files and re-run from a clean request.
+5. For release/deploy requests, enforce `docs/RELEASE_CHECKLIST.md` before sign-off.
 
 ## Task recipes
 

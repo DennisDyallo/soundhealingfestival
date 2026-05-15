@@ -1,0 +1,42 @@
+{
+	"version": 1,
+	"topLevel": [
+		{
+			"path": "static/design-tokens.css",
+			"role": "global design tokens"
+		},
+		{
+			"path": "static/robots.txt",
+			"role": "crawl policy"
+		},
+		{
+			"path": "static/wix.css",
+			"role": "runtime stylesheet from migration pipeline"
+		}
+	],
+	"assetDirectory": {
+		"path": "static/assets",
+		"source": "Sound Healing Evening Stockholm Sweden, 15 Februar 2026_files/",
+		"allowedExtensions": [
+			".jpg",
+			".jpeg",
+			".png",
+			".webp",
+			".gif",
+			".svg",
+			".ico",
+			".avif"
+		],
+		"files": [
+			"static/assets/906353_2b661917c4bf4266b6f73d61ad223168~mv2.jpeg",
+			"static/assets/906353_ba2101e4d1874c55948687eb2b3bc271~mv2.jpg",
+			"static/assets/nsplsh_c57413c9688c443384f058d6b710ac95~mv2.jpg",
+			"static/assets/nsplsh_55535866465f4f4e55476f~mv2_d_3040_4056_s_4_2.jpg",
+			"static/assets/906353_74ef5bdedab847c3a4bfd09a33d9638c~mv2.jpg",
+			"static/assets/906353_3c20290942c0416985098e23538f9ead~mv2.jpg",
+			"static/assets/906353_2adb3b84555648b7bcd2478d7e2d26db~mv2.jpg",
+			"static/assets/906353_b78ae905ea3d4a9da34b0da81fc68425~mv2.jpg",
+			"static/assets/906353_63a2aacceb214b9498f9c7090bca292f~mv2.jpg"
+		]
+	}
+}

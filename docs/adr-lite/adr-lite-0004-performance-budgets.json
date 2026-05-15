@@ -1,0 +1,28 @@
+{
+	"id": "ADR-LITE-0004",
+	"title": "Enforce performance budgets in script + CI",
+	"status": "accepted",
+	"date": "2026-05-15",
+	"decision": "Performance budgets are codified in scripts/perf-budget.mjs and enforced with a non-zero exit mode consumed by npm scripts and CI checks.",
+	"context": "Migration introduced measurable payload improvements that must be preserved over time.",
+	"implementation": [
+		"scripts/perf-budget.mjs compares build artifacts against baseline and thresholds.",
+		"package.json exposes perf:budget and perf:budget:enforce.",
+		"ci:check includes perf:budget:enforce as a release gate."
+	],
+	"verification": [
+		"npm run build",
+		"npm run perf:budget",
+		"npm run perf:budget:enforce"
+	],
+	"evidence": [
+		"scripts/perf-budget.mjs",
+		"package.json scripts",
+		"README.md Performance budget workflow",
+		"COMPARISON.md Performance Budget Guardrails"
+	],
+	"consequences": [
+		"Automated guardrail against payload regressions.",
+		"Repeatable audit trail for old-vs-new metric drift."
+	]
+}

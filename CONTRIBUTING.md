@@ -53,3 +53,7 @@ npm run test:visual:update
 ## 6. Comparison discipline
 
 Any performance, SEO, UX, or payload-affecting change must update `COMPARISON.md`.
+
+## 7. Release and rollback discipline
+
+Use `docs/RELEASE_CHECKLIST.md` for release-candidate validation, parity checks, deploy verification, and rollback readiness.

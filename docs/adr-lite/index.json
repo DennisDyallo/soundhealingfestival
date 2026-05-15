@@ -1,0 +1,47 @@
+{
+	"version": 1,
+	"title": "ADR-lite Index",
+	"location": "docs/adr-lite",
+	"records": [
+		{
+			"id": "ADR-LITE-0001",
+			"title": "Sanitize Wix snapshot and remove extension artifacts",
+			"status": "accepted",
+			"date": "2026-05-15",
+			"file": "docs/adr-lite/adr-lite-0001-wix-snapshot-sanitization.json",
+			"tags": ["migration", "sanitization", "artifact-cleanup"]
+		},
+		{
+			"id": "ADR-LITE-0002",
+			"title": "Preserve SEO parity via extraction + layout rendering",
+			"status": "accepted",
+			"date": "2026-05-15",
+			"file": "docs/adr-lite/adr-lite-0002-seo-parity-strategy.json",
+			"tags": ["seo", "parity", "metadata"]
+		},
+		{
+			"id": "ADR-LITE-0003",
+			"title": "Deliver static CSS and server-load generated HTML",
+			"status": "accepted",
+			"date": "2026-05-15",
+			"file": "docs/adr-lite/adr-lite-0003-static-css-server-html.json",
+			"tags": ["delivery", "css", "server-load"]
+		},
+		{
+			"id": "ADR-LITE-0004",
+			"title": "Enforce performance budgets in script + CI",
+			"status": "accepted",
+			"date": "2026-05-15",
+			"file": "docs/adr-lite/adr-lite-0004-performance-budgets.json",
+			"tags": ["performance", "budgets", "ci"]
+		},
+		{
+			"id": "ADR-LITE-0005",
+			"title": "Restore motion parity for scroll-revealed blocks",
+			"status": "accepted",
+			"date": "2026-05-15",
+			"file": "docs/adr-lite/adr-lite-0005-motion-parity-scroll-reveal.json",
+			"tags": ["motion", "parity", "e2e"]
+		}
+	]
+}

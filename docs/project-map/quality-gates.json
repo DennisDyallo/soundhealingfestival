@@ -1,0 +1,42 @@
+{
+	"version": 1,
+	"localRequired": [
+		{
+			"id": "lint",
+			"command": "npm run lint",
+			"tool": "Biome",
+			"passCondition": "Exit code 0"
+		},
+		{
+			"id": "check",
+			"command": "npm run check",
+			"tool": "SvelteKit sync + svelte-check",
+			"passCondition": "Exit code 0 and no diagnostics"
+		}
+	],
+	"ciPrimary": {
+		"id": "ci:check",
+		"command": "npm run ci:check",
+		"includes": [
+			"lint",
+			"check",
+			"test:unit",
+			"build",
+			"test:smoke",
+			"perf:budget:enforce"
+		],
+		"passCondition": "All included commands exit 0"
+	},
+	"extendedOptional": [
+		{
+			"id": "test:e2e",
+			"command": "npm run test:e2e",
+			"purpose": "Cross-route browser assertions"
+		},
+		{
+			"id": "test:visual",
+			"command": "npm run test:visual",
+			"purpose": "Visual snapshot parity checks"
+		}
+	]
+}

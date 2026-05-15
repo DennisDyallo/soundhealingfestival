@@ -1,0 +1,55 @@
+{
+	"version": 1,
+	"workflows": [
+		{
+			"id": "content-regeneration",
+			"goal": "Regenerate sanitized source artifacts from Wix snapshot",
+			"steps": ["npm run migrate:source", "npm run check"],
+			"produces": [
+				"src/lib/content/home.html",
+				"src/lib/content/wix.css",
+				"src/lib/content/seo.ts",
+				"static/wix.css",
+				"static/assets/*"
+			],
+			"auditSignals": [
+				"migrate-snapshot console output",
+				"git diff limited to generated artifact paths"
+			]
+		},
+		{
+			"id": "seo-parity-validation",
+			"goal": "Verify source-derived metadata is rendered in runtime head",
+			"steps": ["npm run migrate:source", "npm run build", "npm run test:e2e"],
+			"checks": [
+				"tests/e2e/home.spec.ts::homepage keeps core SEO metadata",
+				"src/routes/+layout.svelte renders seo.ts-derived tags"
+			]
+		},
+		{
+			"id": "performance-budget-enforcement",
+			"goal": "Prevent payload regressions",
+			"steps": [
+				"npm run build",
+				"npm run perf:budget",
+				"npm run perf:budget:enforce"
+			],
+			"passCondition": "All budget checks pass; enforce exits 0"
+		},
+		{
+			"id": "release-readiness",
+			"goal": "Run default release gate stack",
+			"steps": ["npm run ci:check"],
+			"passCondition": "ci:check exits 0"
+		},
+		{
+			"id": "motion-parity-regression-check",
+			"goal": "Ensure scroll-revealed lineup content becomes visible",
+			"steps": ["npm run test:e2e"],
+			"checks": [
+				"tests/e2e/home.spec.ts::lineup text is revealed when scrolling",
+				"src/routes/+page.svelte sets data-motion-enter=done via IntersectionObserver"
+			]
+		}
+	]
+}

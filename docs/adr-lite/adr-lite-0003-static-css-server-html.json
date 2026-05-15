@@ -1,0 +1,30 @@
+{
+	"id": "ADR-LITE-0003",
+	"title": "Deliver static CSS and server-load generated HTML",
+	"status": "accepted",
+	"date": "2026-05-15",
+	"decision": "Migrated CSS is extracted to static/wix.css and the large generated HTML payload is loaded server-side from file in +page.server.ts before rendering through a dedicated wrapper component.",
+	"context": "Inlining large style and HTML payloads in client-side route code would increase bundle/runtime overhead and reduce cacheability.",
+	"implementation": [
+		"scripts/migrate-snapshot.mjs writes static/wix.css and src/lib/content/home.html.",
+		"src/routes/+layout.svelte links /wix.css and /design-tokens.css.",
+		"src/routes/+page.server.ts reads src/lib/content/home.html and returns pageHtml.",
+		"src/routes/+page.svelte renders pageHtml with GeneratedHtmlContent.svelte."
+	],
+	"verification": [
+		"npm run migrate:source",
+		"npm run build",
+		"rg -n \"/wix.css|readFile\\(homeHtmlPath\\)|GeneratedHtmlContent\" src/routes"
+	],
+	"evidence": [
+		"scripts/migrate-snapshot.mjs",
+		"src/routes/+layout.svelte",
+		"src/routes/+page.server.ts",
+		"src/routes/+page.svelte",
+		"COMPARISON.md (CSS/content delivery strategy rows)"
+	],
+	"consequences": [
+		"Improved cacheability for CSS.",
+		"Avoids shipping full migrated HTML string in client bundle."
+	]
+}

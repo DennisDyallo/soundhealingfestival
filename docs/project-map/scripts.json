@@ -1,0 +1,94 @@
+{
+	"version": 1,
+	"npmScripts": [
+		{
+			"name": "setup",
+			"command": "npm run migrate:source && npm run check",
+			"purpose": "Regenerate migrated artifacts and validate diagnostics"
+		},
+		{
+			"name": "dev",
+			"command": "vite dev",
+			"purpose": "Start local development server"
+		},
+		{
+			"name": "build",
+			"command": "vite build",
+			"purpose": "Produce static deploy output in build/"
+		},
+		{
+			"name": "migrate:source",
+			"command": "node ./scripts/migrate-snapshot.mjs",
+			"purpose": "Sanitize Wix snapshot and regenerate source/static artifacts"
+		},
+		{
+			"name": "perf:budget",
+			"command": "node ./scripts/perf-budget.mjs",
+			"purpose": "Report artifact metrics against baseline"
+		},
+		{
+			"name": "perf:budget:enforce",
+			"command": "node ./scripts/perf-budget.mjs --enforce",
+			"purpose": "Fail process when any budget exceeds threshold"
+		},
+		{
+			"name": "lint",
+			"command": "biome check .",
+			"purpose": "Lint and formatting policy gate"
+		},
+		{
+			"name": "check",
+			"command": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+			"purpose": "Svelte and TypeScript diagnostic gate"
+		},
+		{
+			"name": "test:unit",
+			"command": "vitest run src",
+			"purpose": "Unit test gate"
+		},
+		{
+			"name": "test:smoke",
+			"command": "vitest run scripts/scripts-smoke.test.ts",
+			"purpose": "Smoke-test migration/perf scripts"
+		},
+		{
+			"name": "test:e2e",
+			"command": "playwright test",
+			"purpose": "Browser flow validation"
+		},
+		{
+			"name": "test:visual",
+			"command": "playwright test -c playwright.visual.config.ts",
+			"purpose": "Visual baseline checks"
+		},
+		{
+			"name": "ci:check",
+			"command": "npm run lint && npm run check && npm run test:unit && npm run build && npm run test:smoke && npm run perf:budget:enforce",
+			"purpose": "Primary CI quality workflow"
+		}
+	],
+	"scriptFiles": [
+		{
+			"path": "scripts/migrate-snapshot.mjs",
+			"inputs": [
+				"Sound Healing Evening Stockholm Sweden, 15 Februar 2026.html",
+				"Sound Healing Evening Stockholm Sweden, 15 Februar 2026_files/"
+			],
+			"outputs": [
+				"src/lib/content/home.html",
+				"src/lib/content/wix.css",
+				"src/lib/content/seo.ts",
+				"static/wix.css",
+				"static/assets/*"
+			]
+		},
+		{
+			"path": "scripts/perf-budget.mjs",
+			"inputs": ["build/index.html", "build/assets/**"],
+			"outputs": [
+				"stdout report",
+				"non-zero exit code in --enforce mode when budget fails"
+			]
+		}
+	]
+}

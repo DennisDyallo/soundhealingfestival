@@ -1,0 +1,26 @@
+{
+	"id": "ADR-LITE-0005",
+	"title": "Restore motion parity for scroll-revealed blocks",
+	"status": "accepted",
+	"date": "2026-05-15",
+	"decision": "Scroll-revealed Wix motion blocks are marked as entered via IntersectionObserver on the home route, setting data-motion-enter=done when elements intersect the viewport.",
+	"context": "After migration, some lineup content stayed hidden because original Wix motion state transitions were no longer runtime-driven.",
+	"implementation": [
+		"src/routes/+page.svelte detects motion candidates and observes viewport intersection.",
+		"When intersecting, element attribute data-motion-enter is set to done.",
+		"tests/e2e/home.spec.ts asserts lineup visibility, text presence, and motion-enter attribute state."
+	],
+	"verification": [
+		"npm run test:e2e",
+		"rg -n \"data-motion-enter|IntersectionObserver\" src/routes/+page.svelte tests/e2e/home.spec.ts"
+	],
+	"evidence": [
+		"src/routes/+page.svelte",
+		"tests/e2e/home.spec.ts",
+		"COMPARISON.md (Scroll-triggered lineup reveal row)"
+	],
+	"consequences": [
+		"Prevents hidden lineup regressions.",
+		"Keeps migrated behavior aligned with live Wix reveal expectations."
+	]
+}

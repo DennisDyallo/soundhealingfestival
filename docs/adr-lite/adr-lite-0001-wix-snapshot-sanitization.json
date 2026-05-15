@@ -1,0 +1,25 @@
+{
+	"id": "ADR-LITE-0001",
+	"title": "Sanitize Wix snapshot and remove extension artifacts",
+	"status": "accepted",
+	"date": "2026-05-15",
+	"decision": "The migration pipeline strips Wix runtime scripts, extension-injected fragments, and consent-banner runtime wrappers from the captured source before generating project artifacts.",
+	"context": "Captured HTML included runtime noise and browser-extension contamination that should not ship in source-controlled outputs.",
+	"implementation": [
+		"scripts/migrate-snapshot.mjs removes script/noscript nodes and consent banner root.",
+		"Only known media extensions are copied from source asset folder to static/assets.",
+		"Asset URLs are rewritten from snapshot-relative paths to /assets/ runtime paths."
+	],
+	"verification": [
+		"npm run migrate:source",
+		"rg -n \"data-hook=\\\"consent-banner-root\\\"|chrome-extension|darkreader|proton\" src static build"
+	],
+	"evidence": [
+		"scripts/migrate-snapshot.mjs",
+		"COMPARISON.md (Browser-extension injected artifacts row)"
+	],
+	"consequences": [
+		"Cleaner deterministic artifacts for build/test.",
+		"Lower risk of shipping third-party extension markup/scripts."
+	]
+}

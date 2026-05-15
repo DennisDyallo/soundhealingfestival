@@ -1,0 +1,52 @@
+{
+	"version": 1,
+	"routes": [
+		{
+			"path": "/",
+			"type": "page",
+			"source": {
+				"layout": "src/routes/+layout.svelte",
+				"layoutConfig": "src/routes/+layout.ts",
+				"page": "src/routes/+page.svelte",
+				"serverLoad": "src/routes/+page.server.ts"
+			},
+			"prerender": true,
+			"dataFlow": {
+				"contentInput": "src/lib/content/home.html",
+				"renderComponent": "src/lib/components/content/GeneratedHtmlContent.svelte",
+				"headMetadata": "src/lib/content/seo.ts"
+			},
+			"automationHints": [
+				"Use +page.server.ts when changing content-loading behavior.",
+				"Use +layout.svelte when changing SEO/head output.",
+				"Keep motion parity logic in +page.svelte covered by e2e tests."
+			]
+		},
+		{
+			"path": "/styleguide",
+			"type": "page",
+			"source": {
+				"layout": "src/routes/+layout.svelte",
+				"page": "src/routes/styleguide/+page.svelte"
+			},
+			"prerender": true,
+			"dataFlow": {
+				"tokens": "static/design-tokens.css",
+				"components": [
+					"src/lib/components/styleguide/StyleguideSection.svelte",
+					"src/lib/components/styleguide/StyleguideCard.svelte",
+					"src/lib/components/styleguide/StyleguideButton.svelte"
+				]
+			},
+			"automationHints": [
+				"Use this route for visual token/component regression checks.",
+				"Visual baseline is covered by tests/visual/key-surfaces.visual.spec.ts."
+			]
+		}
+	],
+	"global": {
+		"appTemplate": "src/app.html",
+		"adapter": "@sveltejs/adapter-static",
+		"prerenderDefault": true
+	}
+}

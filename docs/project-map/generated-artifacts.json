@@ -1,0 +1,58 @@
+{
+	"version": 1,
+	"artifacts": [
+		{
+			"path": "src/lib/content/home.html",
+			"generatedBy": "npm run migrate:source",
+			"sourceOfTruth": "Sound Healing Evening Stockholm Sweden, 15 Februar 2026.html",
+			"category": "migrated-content"
+		},
+		{
+			"path": "src/lib/content/wix.css",
+			"generatedBy": "npm run migrate:source",
+			"sourceOfTruth": "<style> blocks in source snapshot",
+			"category": "migrated-style"
+		},
+		{
+			"path": "src/lib/content/seo.ts",
+			"generatedBy": "npm run migrate:source",
+			"sourceOfTruth": "head metadata in source snapshot",
+			"category": "migrated-seo"
+		},
+		{
+			"path": "static/wix.css",
+			"generatedBy": "npm run migrate:source",
+			"sourceOfTruth": "same extraction pipeline as src/lib/content/wix.css",
+			"category": "runtime-style-delivery"
+		},
+		{
+			"path": "static/assets/*",
+			"generatedBy": "npm run migrate:source",
+			"sourceOfTruth": "image/icon files from source asset directory",
+			"category": "static-media"
+		},
+		{
+			"path": "build/index.html",
+			"generatedBy": "npm run build",
+			"sourceOfTruth": "SvelteKit prerender output",
+			"category": "deploy-output"
+		},
+		{
+			"path": "build/assets/*",
+			"generatedBy": "npm run build",
+			"sourceOfTruth": "Vite bundling",
+			"category": "deploy-output"
+		},
+		{
+			"path": "test-results/**",
+			"generatedBy": "npm run test:e2e or npm run test:visual",
+			"sourceOfTruth": "Playwright runs",
+			"category": "test-output"
+		}
+	],
+	"regenerationOrder": [
+		"npm run migrate:source",
+		"npm run build",
+		"npm run perf:budget"
+	]
+}

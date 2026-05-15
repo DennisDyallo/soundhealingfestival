@@ -1,0 +1,28 @@
+{
+	"id": "ADR-LITE-0002",
+	"title": "Preserve SEO parity via extraction + layout rendering",
+	"status": "accepted",
+	"date": "2026-05-15",
+	"decision": "SEO metadata is extracted from the source snapshot into src/lib/content/seo.ts and rendered centrally in src/routes/+layout.svelte to preserve old-to-new parity.",
+	"context": "Migration needed parity for title, description, canonical, OG/Twitter tags, and structured data while moving to static Svelte output.",
+	"implementation": [
+		"scripts/migrate-snapshot.mjs extracts SEO fields into seo.ts.",
+		"src/routes/+layout.svelte emits all relevant meta/link/script tags from seo.ts.",
+		"tests/e2e/home.spec.ts asserts core SEO metadata is present."
+	],
+	"verification": [
+		"npm run migrate:source",
+		"npm run build",
+		"npm run test:e2e"
+	],
+	"evidence": [
+		"src/lib/content/seo.ts",
+		"src/routes/+layout.svelte",
+		"tests/e2e/home.spec.ts",
+		"COMPARISON.md (SEO parity rows)"
+	],
+	"consequences": [
+		"Single source for SEO metadata with reproducible regeneration.",
+		"Lower chance of metadata drift across routes."
+	]
+}

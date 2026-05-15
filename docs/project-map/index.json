@@ -1,0 +1,18 @@
+{
+	"version": 1,
+	"generatedFor": "agent-navigation-and-automation",
+	"scope": "soundhealingfestivalstockholm.com",
+	"files": [
+		"docs/project-map/routes.json",
+		"docs/project-map/scripts.json",
+		"docs/project-map/generated-artifacts.json",
+		"docs/project-map/static-assets.json",
+		"docs/project-map/quality-gates.json",
+		"docs/project-map/workflows.json"
+	],
+	"notes": [
+		"Paths are repository-relative.",
+		"Commands are executable from repository root.",
+		"Use this map as canonical entrypoint for automation tasks."
+	]
+}

@@ -1,0 +1,19 @@
+:root {
+	--sg-font-sans: Inter, "Segoe UI", Helvetica, Arial, sans-serif;
+	--sg-color-bg: #f8f8f8;
+	--sg-color-surface: #ffffff;
+	--sg-color-text: #111111;
+	--sg-color-muted: #585858;
+	--sg-color-primary: #4b3fb7;
+	--sg-color-primary-contrast: #ffffff;
+	--sg-border-radius-sm: 6px;
+	--sg-border-radius-md: 12px;
+	--sg-space-1: 4px;
+	--sg-space-2: 8px;
+	--sg-space-3: 12px;
+	--sg-space-4: 16px;
+	--sg-space-5: 24px;
+	--sg-space-6: 32px;
+	--sg-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+	--sg-shadow-md: 0 6px 18px rgba(0, 0, 0, 0.12);
+}

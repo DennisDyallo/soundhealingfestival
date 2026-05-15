@@ -1,6 +1,5 @@
 <script lang="ts">
 import { seo } from "$lib/content/seo";
-import wixCss from "$lib/content/wix.css?raw";
 
 let { children } = $props();
 const scriptCloseTag = "<" + "/script>";
@@ -13,7 +12,8 @@ const structuredDataTags = seo.structuredData
 </script>
 
 <svelte:head>
-	{@html `<style>${wixCss}</style>`}
+	<link rel="stylesheet" href="/design-tokens.css" />
+	<link rel="stylesheet" href="/wix.css" />
 	<title>{seo.title}</title>
 	{#if seo.description}
 		<meta name="description" content={seo.description} />

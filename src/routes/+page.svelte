@@ -1,7 +1,8 @@
 <script lang="ts">
-import pageHtml from "$lib/content/home.html?raw";
+import GeneratedHtmlContent from "$lib/components/content/GeneratedHtmlContent.svelte";
+import type { PageData } from "./$types";
+
+let { data }: { data: PageData } = $props();
 </script>
 
-<div class="wix-site-content">
-	{@html pageHtml}
-</div>
+<GeneratedHtmlContent html={data.pageHtml} />

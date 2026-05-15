@@ -13,6 +13,7 @@
 		"migrate:source": "node ./scripts/migrate-snapshot.mjs",
 		"perf:budget": "node ./scripts/perf-budget.mjs",
 		"perf:budget:enforce": "node ./scripts/perf-budget.mjs --enforce",
+		"request-log:verify": "node ./scripts/verify-request-log.mjs",
 		"format": "biome format --write .",
 		"lint": "biome check .",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -24,7 +25,7 @@
 		"test:e2e": "playwright test",
 		"test:visual": "playwright test -c playwright.visual.config.ts",
 		"test:visual:update": "playwright test -c playwright.visual.config.ts --update-snapshots",
-		"ci:check": "npm run lint && npm run check && npm run test:unit && npm run build && npm run test:smoke && npm run perf:budget:enforce"
+		"ci:check": "npm run lint && npm run check && npm run request-log:verify && npm run test:unit && npm run build && npm run test:smoke && npm run perf:budget:enforce"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.56.1",

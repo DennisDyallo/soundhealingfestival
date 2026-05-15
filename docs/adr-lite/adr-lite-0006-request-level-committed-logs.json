@@ -1,0 +1,28 @@
+{
+	"id": "ADR-LITE-0006",
+	"title": "Require request-level committed logs alongside architecture ADRs",
+	"status": "accepted",
+	"date": "2026-05-15",
+	"problem": "Architecture ADRs explain long-lived technical choices but do not preserve per-request constraints, exact user wording, checks executed, and rollback links needed during incident response or support handoffs.",
+	"decision": "Every delivered request is recorded in a committed request log entry (under docs/request-log) in addition to architecture ADRs, so request intent, guardrails, validation evidence, and rollback references remain auditable in-repo.",
+	"alternatives_rejected": [
+		"Rely on architecture ADRs only, because they omit request-by-request execution evidence and support metadata.",
+		"Use PR descriptions/issues as the primary operational log, because they are less durable for branch-local recovery and are harder to query consistently in cloned projects.",
+		"Keep request notes outside the repository, because support and rollback responders need the same source of truth as code reviewers."
+	],
+	"consequences": [
+		"Adds lightweight documentation overhead per task, but creates a deterministic audit trail of what was asked, changed, and validated.",
+		"Improves accountability for protected areas by pairing implementation changes with explicit checks and escalation notes.",
+		"Reduces ambiguity during regression triage by preserving assumptions and must-not-change constraints with each request."
+	],
+	"rollback_support_relationship": [
+		"Request logs capture rollback_reference values that map work items to the rollback checklist and last-known-good commits/artifacts.",
+		"Support responders can quickly recover request context (scope targets, checks_run, escalation_notes) without reconstructing history from chat or PR threads.",
+		"During incidents, architecture ADRs still explain system-level intent while request logs provide transaction-level evidence for what to revert or re-run."
+	],
+	"evidence": [
+		"docs/request-log/schema.json",
+		"docs/request-log/requests/sample-request.md",
+		"docs/RELEASE_CHECKLIST.md (Rollback checklist)"
+	]
+}

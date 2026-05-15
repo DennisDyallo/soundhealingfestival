@@ -42,6 +42,14 @@
 			"date": "2026-05-15",
 			"file": "docs/adr-lite/adr-lite-0005-motion-parity-scroll-reveal.json",
 			"tags": ["motion", "parity", "e2e"]
+		},
+		{
+			"id": "ADR-LITE-0006",
+			"title": "Require request-level committed logs alongside architecture ADRs",
+			"status": "accepted",
+			"date": "2026-05-15",
+			"file": "docs/adr-lite/adr-lite-0006-request-level-committed-logs.json",
+			"tags": ["request-log", "adr-lite", "rollback", "support"]
 		}
 	]
 }

@@ -1,6 +1,13 @@
 # Non-Technical Product Owner Brief
 
-Use this when drafting website changes in free text.  
+Use `START_HERE.md` for daily requests. Use this longer brief when drafting website changes that need more context, approval, or consultant review.
+
+Default Codex instruction:
+
+```text
+Use $soundhealing-owner-ops.
+```
+
 Default execution workflow is the request log:
 - `docs/request-log/templates/*` (start with `intake.md`)
 - `docs/request-log/requests/*` (live request records)
@@ -43,15 +50,16 @@ Definition of done: CTA has stronger contrast and visual hierarchy; visual/e2e c
 
 ## 3) AI execution contract (must happen every time)
 
-1. Restate request as scoped file-level plan.
-2. List assumptions explicitly when requirement is vague.
-3. Run required checks:
+1. Follow `AGENTS.md` and `.codex/skills/soundhealing-owner-ops/SKILL.md`.
+2. Restate request as scoped file-level plan.
+3. List assumptions explicitly when requirement is vague.
+4. Run required checks:
    - `npm run lint && npm run check`
    - plus task-specific gates (`build`, `test:e2e`, `test:visual`, `perf:budget:enforce`).
-4. Update `COMPARISON.md` when SEO/performance/parity-visible behavior changes.
-5. Create a request log entry at task start (`docs/request-log/requests/REQ-XXXX.md`) with status `attempted`.
-6. At task finish, update request status to `completed`, `blocked`, or `reverted`, including checks run, commit refs, and rollback reference.
-7. Commit large changes using **Conventional Commits** with clear scope and include the request-id reference (for example `[REQ-0042]`).
+5. Update `COMPARISON.md` when SEO/performance/parity-visible behavior changes.
+6. Create a request log entry at task start (`docs/request-log/requests/REQ-XXXX.md`) with status `attempted`.
+7. At task finish, update request status to `completed`, `blocked`, or `reverted`, including checks run, commit refs, and rollback reference.
+8. Commit large changes using **Conventional Commits** with clear scope and include the request-id reference (for example `[REQ-0042]`).
 
 ## 4) “Do not proceed” triggers
 

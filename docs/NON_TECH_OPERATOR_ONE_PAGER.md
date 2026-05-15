@@ -1,6 +1,6 @@
 # Non-Technical Website Operator — One Pager
 
-Use this page as your daily operating guide when working with AI agents.
+Use `START_HERE.md` as the shortest daily guide. This page gives the same workflow with extra approval and escalation detail.
 
 ## 1) What you do
 
@@ -12,6 +12,8 @@ Use this page as your daily operating guide when working with AI agents.
 ## 2) Copy/paste request format
 
 ```text
+Use $soundhealing-owner-ops.
+
 Goal:
 What to change:
 What must not change:
@@ -22,6 +24,7 @@ Done means:
 
 ## 3) What AI must always do
 
+- Follow `AGENTS.md` and `.codex/skills/soundhealing-owner-ops/SKILL.md`.
 - Restate your request with clear scope.
 - List assumptions before implementing.
 - Run checks:
@@ -58,6 +61,10 @@ Done means:
 
 ## 7) Where to find the full system
 
+- Daily start: `START_HERE.md`
+- Codex instructions: `AGENTS.md`
+- Codex skill: `.codex/skills/soundhealing-owner-ops/`
+- Codex agent prompts: `.codex/agents/`
 - Intake brief: `docs/NON_TECH_PRODUCT_OWNER_BRIEF.md`
 - Recipes: `docs/CODEX_WORKFLOWS.md`
 - Skill contracts: `docs/CODEX_SKILL_BLUEPRINTS.md`

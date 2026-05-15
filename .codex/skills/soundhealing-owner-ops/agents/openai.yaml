@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sound Healing Owner Ops"
+  short_description: "Run safe Codex website changes"
+  default_prompt: "Use $soundhealing-owner-ops to handle this website change request safely."

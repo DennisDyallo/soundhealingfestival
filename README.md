@@ -1,4 +1,24 @@
-# Sound Healing Festival Stockholm — SvelteKit Migration
+# Sound Healing Festival Stockholm — Codex-Operated Website
+
+## For the product owner
+
+Start here: `START_HERE.md`
+
+Daily workflow:
+
+1. Open Codex in this repo.
+2. Paste your request using the short format in `START_HERE.md`.
+3. Ask Codex to use `$soundhealing-owner-ops`.
+4. Review the summary, changed files, and checks.
+5. Approve only when the result and validation match the request.
+
+Codex operating files:
+
+- `AGENTS.md` — repo-level Codex instructions.
+- `.codex/skills/soundhealing-owner-ops/` — default skill for owner-operated website changes.
+- `.codex/agents/product-owner-operator.md` — prompt for routine owner requests.
+- `.codex/agents/release-reviewer.md` — prompt for release-readiness review.
+- `docs/request-log/` — audit trail for owner requests.
 
 This project migrates the saved Wix snapshot into a static SvelteKit site while stripping runtime artifacts from the source export.
 
@@ -92,6 +112,10 @@ It must be updated on every relevant change and each new comparison run.
 
 ## Contributor docs
 
+- `START_HERE.md` — one-page product-owner entry point
+- `AGENTS.md` — Codex repo instructions
+- `.codex/skills/soundhealing-owner-ops/` — Codex skill for safe owner-operated changes
+- `.codex/agents/` — reusable Codex agent prompt files
 - **Default for non-technical change requests (request-log workflow):**
   - `docs/request-log/index.json` — registry of request entries
   - `docs/request-log/schema.json` — request entry schema

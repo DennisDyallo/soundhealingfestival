@@ -2,8 +2,15 @@
 
 Copy-paste templates for recurring Codex jobs in this repo.
 
+Canonical repo-local prompt files:
+
+- `.codex/agents/product-owner-operator.md`
+- `.codex/agents/release-reviewer.md`
+
 Use with:
 
+- `AGENTS.md` (repo-level Codex instructions)
+- `.codex/skills/soundhealing-owner-ops/` (default owner-ops skill)
 - `docs/ARCHITECTURE.md` (file map + ownership)
 - `docs/CODEX_WORKFLOWS.md` (safety rails)
 - `docs/CODEX_SKILL_BLUEPRINTS.md` (contract lifecycle)
@@ -30,6 +37,7 @@ Use with:
 
 ```text
 You are working in /Users/Dennis.Dyall/Code/other/soundhealingfestivalstockholm.com.
+Use $soundhealing-owner-ops.
 
 Task: content/text update.
 Update: <exact old copy> -> <exact new copy>.
@@ -85,6 +93,7 @@ Return:
 
 ```text
 You are working in /Users/Dennis.Dyall/Code/other/soundhealingfestivalstockholm.com.
+Use $soundhealing-owner-ops.
 
 Task: SEO/meta update.
 Update these fields: <title|description|canonical|og:*|twitter:*|json-ld>.
@@ -144,6 +153,7 @@ Return:
 
 ```text
 You are working in /Users/Dennis.Dyall/Code/other/soundhealingfestivalstockholm.com.
+Use $soundhealing-owner-ops.
 
 Task: investigate and fix visual parity issue.
 Observed issue: <what differs from baseline>.
@@ -205,6 +215,7 @@ Return:
 
 ```text
 You are working in /Users/Dennis.Dyall/Code/other/soundhealingfestivalstockholm.com.
+Use $soundhealing-owner-ops.
 
 Task: run a performance budget optimization pass.
 Optimization target: <html bytes|js bytes|js file count|largest image>.

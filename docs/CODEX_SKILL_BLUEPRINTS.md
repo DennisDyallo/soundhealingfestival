@@ -2,6 +2,12 @@
 
 Operational blueprint for reusing Codex workflows in this repo and future carbon-copy projects.
 
+Current repo-local skill:
+
+- `.codex/skills/soundhealing-owner-ops/` — default skill for non-technical owner website operations.
+
+Use the system `skill-creator` guidance when adding or changing skills. Keep skill bodies concise, put detailed examples in `references/`, and include `agents/openai.yaml` metadata.
+
 ## 1) Role-oriented skill set
 
 | Role | Primary skill bundle | Inputs they must provide | Outputs they own | Mandatory checks |

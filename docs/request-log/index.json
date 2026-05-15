@@ -6,6 +6,15 @@
 	"requestsPath": "docs/request-log/requests",
 	"records": [
 		{
+			"request_id": "REQ-20260515-001",
+			"title": "Codex owner-operation bootstrap",
+			"status": "completed",
+			"file": "docs/request-log/requests/REQ-20260515-001.md",
+			"opened_at": "2026-05-15T20:46:40Z",
+			"updated_at": "2026-05-15T20:51:26Z",
+			"closed_at": "2026-05-15T20:51:26Z"
+		},
+		{
 			"request_id": "REQ-0001",
 			"title": "Sample request",
 			"status": "attempted",

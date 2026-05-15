@@ -1,0 +1,35 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.4.15/schema.json",
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab"
+	},
+	"linter": {
+		"enabled": true
+	},
+	"overrides": [
+		{
+			"includes": ["**/*.svelte"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noUnusedImports": "off",
+						"noUnusedVariables": "off"
+					}
+				}
+			}
+		}
+	],
+	"files": {
+		"includes": [
+			"**",
+			"!build",
+			"!.svelte-kit",
+			"!node_modules",
+			"!src/lib/content/wix.css",
+			"!src/lib/content/home.html",
+			"!Sound Healing Evening Stockholm Sweden, 15 Februar 2026_files",
+			"!Sound Healing Evening Stockholm Sweden, 15 Februar 2026.html"
+		]
+	}
+}

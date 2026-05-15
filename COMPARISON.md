@@ -42,6 +42,7 @@ Minimum required updates per pass:
 | CI quality gates | Not defined | GitHub Actions workflow for validation + e2e | ✅ Added | `.github/workflows/ci.yml` enforces onboarding-safe checks |
 | Styleguide workflow | Wix editor-centric | Source-controlled `/styleguide` + token file | ✅ Added | Supports developer/UX collaboration in codebase |
 | No-code Codex workflow docs | Not defined | Task recipes + safety rails + role playbooks | ✅ Added | `docs/CODEX_WORKFLOWS.md` and `docs/ROLE_PLAYBOOKS.md` |
+| Reproducible carbon-copy governance docs | Not defined | Project map + ADR-lite + release checklist + Codex templates + RUM plan | ✅ Added | Creates reusable workflow trail for future carbon-copy projects |
 
 ## Maturity Snapshot
 
@@ -174,6 +175,7 @@ You get **more control**, **faster updates**, and **lower ongoing dependency** o
 | 2026-05-15 | Fleet optimization wave (content + CSS + image delivery) | `src/routes/+page.server.ts`, `src/routes/+page.svelte`, `src/routes/+layout.svelte`, `scripts/migrate-snapshot.mjs`, `static/wix.css`, `src/lib/content/home.html` | Significant payload/latency improvement with strict visual parity | ✅ |
 | 2026-05-15 | Onboarding + test + styleguide scaffolding foundation | `README.md`, `CONTRIBUTING.md`, `docs/*`, `.github/workflows/ci.yml`, `package.json`, `src/routes/styleguide/+page.svelte`, `static/design-tokens.css`, `tests/e2e/home.spec.ts`, `scripts/scripts-smoke.test.ts` | Improves delivery reliability and change safety; minor JS payload increase from new styleguide route | ✅ |
 | 2026-05-15 | Scroll motion reveal parity fix for hidden lineup block | `src/routes/+page.svelte`, `tests/e2e/home.spec.ts`, `COMPARISON.md` | No metadata impact; restores visibility parity for lineup/animated content | ✅ |
+| 2026-05-15 | Workflow governance + reusable Codex execution framework | `docs/project-map/*`, `docs/adr-lite/*`, `docs/RELEASE_CHECKLIST.md`, `docs/CODEX_SKILL_BLUEPRINTS.md`, `docs/CODEX_AGENT_TEMPLATES.md`, `docs/RUM_CWV_TRACKING_PLAN.md`, `README.md`, `CONTRIBUTING.md`, `docs/CODEX_WORKFLOWS.md`, `docs/ROLE_PLAYBOOKS.md` | No direct SEO change; strengthens reproducible delivery and auditability | ✅ |
 
 ## Comparison Runs
 
@@ -187,3 +189,4 @@ You get **more control**, **faster updates**, and **lower ongoing dependency** o
 | 2026-05-15 | Performance budget script run (`perf:budget`) | Artifact-level script (`scripts/perf-budget.mjs`) against latest `build/` output | HTML 464,394 B, JS refs 8, JS bytes 80,465 B, largest image 518,561 B; all thresholds passing | Keep budgets updated after each optimization pass |
 | 2026-05-15 | Onboarding scaffolding validation run | Lint + typecheck + unit + build + smoke + e2e + enforced budgets | HTML 464,451 B, JS refs 8, JS bytes 101,526 B, largest image 518,561 B; all thresholds still passing | Track future payload drift as onboarding surface grows |
 | 2026-05-15 | Live vs local scroll-state lineup diagnostics | Playwright DOM/computed-style comparison across scroll fractions | Local lineup block stayed `opacity:0` while live transitioned to visible after scroll; fixed by viewport-driven `data-motion-enter=\"done\"` marking | Keep e2e guard for lineup visibility to prevent regressions |
+| 2026-05-15 | Workflow governance completeness sweep | Documentation parity audit against repo docs and workflow artifacts | Confirmed reproducible workflow docs in place; README + comparison ledger refreshed for future carbon-copy reuse | Keep docs synchronized whenever workflow assets change |

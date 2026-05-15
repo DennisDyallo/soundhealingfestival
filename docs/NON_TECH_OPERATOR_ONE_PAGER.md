@@ -1,6 +1,6 @@
 # Non-Technical Website Operator — One Pager
 
-Use `START_HERE.md` as the shortest daily guide. This page gives the same workflow with extra approval and escalation detail.
+Use `START_HERE.md` as the shortest daily guide. This page adds only approval and escalation detail.
 
 ## 1) What you do
 
@@ -27,14 +27,9 @@ Done means:
 - Follow `AGENTS.md` and `.codex/skills/soundhealing-owner-ops/SKILL.md`.
 - Restate your request with clear scope.
 - List assumptions before implementing.
-- Run checks:
-  - `npm run lint && npm run check`
-  - plus task checks (`build`, `test:e2e`, `test:visual`, `perf:budget:enforce`) when relevant.
-- Create request log entry at task start with status `attempted`.
-- Update request log status at finish to `completed`, `blocked`, or `reverted`.
-- Record checks run, commit refs, and rollback reference in the request log closeout.
-- Update `COMPARISON.md` when SEO/performance/parity-visible behavior changes.
-- Commit large changes using **Conventional Commits** in logical slices and include the request-id reference (for example `[REQ-0042]`).
+- Run the checks required by `AGENTS.md`.
+- Keep the request log current from start to closeout.
+- Tell you what changed, what passed, and what still needs owner verification.
 
 ## 4) Approval checklist (you)
 
@@ -42,12 +37,11 @@ Done means:
 - “Must not change” constraints were respected.
 - Validation output was provided.
 - Changed files look scoped to your request.
-- Request log shows final status and includes checks, commits, and rollback reference.
-- If large change: multiple clear commits were created.
+- Request log has final status, checks, commits if any, and rollback reference.
 
 ## 5) Escalate to human fullstack developer when
 
-- Protected files are changed (`scripts/*`, `src/routes/+layout.svelte`, critical `COMPARISON.md` baselines).
+- Codex reports protected-file risk under `AGENTS.md`.
 - Scope is unclear or conflicts with constraints.
 - Validation fails or parity breaks.
 - Rollback plan is missing.
@@ -57,7 +51,7 @@ Done means:
 - Ask AI for the exact commit hash to revert.
 - Revert the minimal commit first.
 - Re-run `npm run lint && npm run check` and confirm page behavior.
-- Update the request log to `reverted` and add the rollback reference used.
+- Ask AI to update the request log to `reverted`.
 
 ## 7) Where to find the full system
 

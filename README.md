@@ -113,14 +113,9 @@ It must be updated on every relevant change and each new comparison run.
 ## Contributor docs
 
 - `START_HERE.md` — one-page product-owner entry point
-- `AGENTS.md` — Codex repo instructions
-- `.codex/skills/soundhealing-owner-ops/` — Codex skill for safe owner-operated changes
-- `.codex/agents/` — reusable Codex agent prompt files
-- **Default for non-technical change requests (request-log workflow):**
-  - `docs/request-log/index.json` — registry of request entries
-  - `docs/request-log/schema.json` — request entry schema
-  - `docs/request-log/templates/*` — intake and handoff templates
-  - `docs/request-log/requests/*` — committed request records
+- `AGENTS.md` + `.codex/skills/soundhealing-owner-ops/` — canonical Codex operating rules
+- `.codex/agents/` — reusable Codex prompt files
+- `docs/request-log/` — request audit trail
 - `CONTRIBUTING.md` — onboarding and contribution workflow
 - `docs/ARCHITECTURE.md` — codebase map and data flow
 - `docs/CODEX_WORKFLOWS.md` — safe no-code Codex task recipes

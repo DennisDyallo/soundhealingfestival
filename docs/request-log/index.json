@@ -15,6 +15,15 @@
 			"closed_at": "2026-05-15T20:51:26Z"
 		},
 		{
+			"request_id": "REQ-20260515-002",
+			"title": "Trim overlapping Codex docs",
+			"status": "completed",
+			"file": "docs/request-log/requests/REQ-20260515-002.md",
+			"opened_at": "2026-05-15T20:54:46Z",
+			"updated_at": "2026-05-15T20:56:59Z",
+			"closed_at": "2026-05-15T20:56:59Z"
+		},
+		{
 			"request_id": "REQ-0001",
 			"title": "Sample request",
 			"status": "attempted",

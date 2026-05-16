@@ -6,6 +6,19 @@ This repo currently has one repo-local skill:
 
 Use it for non-technical owner website operations: content edits, event facts, ticket links, lineup changes, SEO/social metadata, image swaps, parity fixes, performance checks, and release readiness.
 
+## Skill Scope Policy
+
+Do not create new skills or agents for every change type yet. Keep one owner-facing skill, `$soundhealing-owner-ops`, with recipes in `references/` until repeated real usage proves a split is worth it.
+
+Prefer adding a recipe/reference over creating a new skill when the work is still a normal website operation, such as SEO edits, image swaps, ticket links, posts, pages, or release checks.
+
+Consider a new skill only when a workflow becomes frequent, specialized, and confusing inside the main skill. Practical thresholds:
+
+- Mateusz requests the same new content/post/page workflow at least five times.
+- A CMS introduces distinct content types with their own validation rules.
+- A task needs deterministic scripts or assets that would bloat the owner-ops skill.
+- A release workflow becomes complex enough that the existing release reviewer prompt is no longer sufficient.
+
 ## Skill Authoring Rules
 
 When adding or changing skills:

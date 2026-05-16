@@ -58,6 +58,22 @@ Expected work:
 - Update `COMPARISON.md`.
 - Run `npm run lint`, `npm run check`, `npm run test:unit`, and `npm run build`.
 
+## New Content, Post, Page, or Section
+
+Owner prompt:
+
+```text
+Use $soundhealing-owner-ops to add a new <post|page|section> with this content: <copy/assets>. It must reuse the existing styleguide and components, with no surprise visual changes.
+```
+
+Expected work:
+
+- Inspect `/styleguide`, `static/design-tokens.css`, and existing styleguide components before choosing a layout.
+- Reuse existing button, card, typography, spacing, and image patterns.
+- Add a styleguide example if the work introduces a reusable pattern.
+- Return a plain-language note explaining what pattern was reused and what Mateusz should review.
+- Run `npm run lint`, `npm run check`, `npm run build`, and visual checks when layout changes are material.
+
 ## Release Check
 
 Owner prompt:
@@ -72,4 +88,3 @@ Expected work:
 - Run `npm run ci:check`.
 - Run `npm run test:e2e` for visitor-facing changes if not already run.
 - Return blockers first, then residual risk.
-

@@ -1,6 +1,6 @@
 # Start Here
 
-This repo is set up so a non-technical product owner can ask Codex for website changes in plain English.
+This repo is set up so Mateusz can ask Codex for website changes in plain English.
 
 ## Daily Workflow
 
@@ -38,11 +38,16 @@ Use $soundhealing-owner-ops to replace the hero image with <filename>. Keep the 
 Use $soundhealing-owner-ops to update the artist lineup with this exact text: <copy>. Do not change other sections. Done means the lineup is visible after scrolling and checks pass.
 ```
 
+```text
+Use $soundhealing-owner-ops to add a new <post|page|section> using the existing styleguide and reusable components. Do not invent new colors, spacing, typography, or card/button styles. Done means it looks coherent with the current site, `/styleguide` still represents the pattern, and visual/build checks pass.
+```
+
 ## What Codex Should Return
 
 - What changed in plain language.
 - Files changed.
 - Checks run and whether they passed.
+- How the change reused existing styleguide/components, when the request adds content, posts, pages, or sections.
 - Anything the owner must verify, such as a ticket URL or event fact.
 - Request-log ID and final status.
 
@@ -50,3 +55,6 @@ Use $soundhealing-owner-ops to update the artist lineup with this exact text: <c
 
 Escalate to a developer when Codex reports failed checks, unclear event facts, protected-file risk, release/deploy uncertainty, or a missing rollback path.
 
+## Consultant Override
+
+Dennis can write `/DevMode` when taking over from Mateusz. This switches Codex to technical consultant communication while keeping all safety rules active.

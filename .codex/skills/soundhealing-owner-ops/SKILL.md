@@ -7,7 +7,7 @@ description: Operate the Sound Healing Festival Stockholm website safely for a n
 
 ## Overview
 
-Use this skill to turn a plain-English owner request into a scoped, validated repo change. The owner should not need to understand SvelteKit, generated Wix markup, request-log schema details, or test selection.
+Use this skill to turn Mateusz's plain-English owner request into a scoped, validated repo change. Mateusz should not need to understand SvelteKit, generated Wix markup, request-log schema details, styleguide enforcement, or test selection.
 
 ## First Steps
 
@@ -17,6 +17,7 @@ Use this skill to turn a plain-English owner request into a scoped, validated re
    - visible content
    - SEO/social metadata
    - event facts: date, venue, lineup, ticket URL, price
+   - new content, posts, pages, or reusable sections
    - assets/performance
    - release/deploy readiness
 4. If event facts conflict or are missing, ask for the exact fact before changing public-facing content.
@@ -46,6 +47,15 @@ For content/text edits:
 - Preserve layout classes and generated structure unless the request is a redesign.
 - Run `npm run lint`, `npm run check`, and `npm run build`.
 - Run `npm run test:e2e` when the changed text is part of a tested route or scroll behavior.
+
+For new content, posts, pages, or sections:
+
+- Inspect `/styleguide`, `static/design-tokens.css`, `src/lib/components/styleguide/*`, and nearby route/page patterns before editing.
+- Reuse existing components and tokens first. Do not introduce ad hoc colors, spacing, typography, cards, buttons, or layout styles.
+- Prefer structured Svelte components for new authored content. Avoid expanding generated Wix snapshot markup unless the request is specifically about snapshot parity.
+- If a new visual pattern is genuinely needed, add a matching styleguide example and state why existing patterns were insufficient.
+- Run `npm run lint`, `npm run check`, `npm run build`, and `npm run test:visual` for layout-sensitive changes.
+- In the closeout, explain which existing styleguide/component pattern was reused and what Mateusz should visually review.
 
 For SEO/social metadata:
 
@@ -83,6 +93,8 @@ Keep the final answer short and practical:
 - Name any owner verification needed.
 - Include the request ID and final status.
 - Mention protected files touched.
+- Explain business risk or uncertainty in plain language.
+- Do not ask Mateusz to choose technical implementation details.
 
 ## References
 

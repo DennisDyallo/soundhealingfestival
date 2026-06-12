@@ -60,12 +60,30 @@ Guide him through, in his browser:
 3. Verify the email.
 4. Tell Dennis the username so Dennis can add him as a collaborator on the repo.
 
-> FLAG FOR DENNIS: add Mateusz as a collaborator with write access, and confirm the
-> local clone's `origin` points at the shared repo with credentials that let him push
-> (Git Credential Manager will prompt a browser sign-in on first push).
+> FLAG FOR DENNIS: add Mateusz as a collaborator with write access on the shared
+> repo (`dennisdyallo/soundhealingfestival`).
 
 Do not block forever waiting; if collaborator access is not ready, pause here and
 tell Mateusz you'll continue once Dennis confirms.
+
+### Set up push access (so his work syncs to the shared repo)
+
+Once Dennis confirms collaborator access:
+
+1. Confirm the working copy points at the shared repo:
+   `git -C <repo> remote -v` should show `origin` = the shared repo.
+2. Confirm Git Credential Manager is the credential helper:
+   `git config --get credential.helper` should contain `manager`. (It ships with
+   the Git we installed and needs no setup.)
+3. Trigger the one-time browser sign-in by making the first authenticated push for
+   him: a tiny no-op or the first real change. GCM opens a browser; he clicks
+   "Authorize" on GitHub once, and the credential is stored securely after that.
+4. Verify the push landed (the commit appears on GitHub). If the push is rejected
+   for auth reasons, re-run the GCM sign-in; if it is rejected for access reasons,
+   flag Dennis (collaborator invite may be pending).
+
+Do NOT use Personal Access Tokens or SSH keys - GCM's browser sign-in is the only
+auth path for Mateusz.
 
 ## Step 4 - Make sure the site builds
 
@@ -121,14 +139,29 @@ Do not guess registrar settings. If unsure, stop and flag.
    `completed` or `blocked`.
 3. If the live/public surface or metadata changed, update `COMPARISON.md`.
 
-## Step 8 - Teach the new normal
+## Step 8 - Teach the new normal (trunk-based daily loop)
 
-Explain in plain language:
+Explain the day-to-day flow in plain language:
 
-- "From now on, when you approve a change, it goes live automatically in a minute or
-  two."
-- "Your work is safely backed up and Dennis can see the history."
-- "If a deploy ever looks wrong, tell me and we can roll back."
+1. Mateusz asks for a change; you make it with `$soundhealing-owner-ops`, run the
+   safety checks, and show him the result.
+2. When he approves, you commit to `main` and push.
+3. The host rebuilds and the change is live in about a minute or two.
+4. Every change is backed up on GitHub, and Dennis can review the history any time
+   (review is after-the-fact, not a gate - so keep changes small and checked).
+
+### Rollback (two paths - prefer the fast one)
+
+If a live change looks wrong:
+
+- **Fast path (recommended): roll back in the host dashboard.** Cloudflare Pages and
+  Netlify keep previous deploys; one click restores the last good version
+  immediately, while you fix the source. Tell Mateusz this is the "undo live" button.
+- **Source fix: revert the commit.** Revert the offending commit on `main` and push;
+  the host redeploys the corrected version. This keeps GitHub and the live site in
+  sync. Requires working authenticated Git (see Step 3 push access).
+
+Always record a rollback in the request log (status `reverted`) with the reason.
 
 ## Guardrails
 

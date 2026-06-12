@@ -39,6 +39,25 @@ At task finish:
 - Set status to `completed`, `blocked`, or `reverted`.
 - Include checks run, commit refs or `none`, and rollback reference or `null` with a reason.
 
+## Syncing and Publishing (gated)
+
+Whether an approved change is published depends on whether push access is set up:
+
+- **Before go-live (account-free phase):** there is no authenticated push remote.
+  Keep changes local only. Commit locally if useful, but do not attempt to push.
+- **After go-live:** if an authenticated push remote is configured (check
+  `git remote -v` shows `origin` on the shared repo AND
+  `git config --get credential.helper` contains `manager`), then once Mateusz
+  approves a change, commit it to `main` and push. The host auto-deploys, so this
+  publishes the change. Keep changes small because review is after-the-fact.
+
+To detect the phase: if `git remote -v` has no `origin`, you are pre-go-live - do not
+push. If a push is rejected for auth or access reasons, do not retry blindly; explain
+in plain language and offer to involve Dennis. Never use Personal Access Tokens or SSH
+keys - first push triggers Git Credential Manager's browser sign-in.
+
+See `.codex/skills/soundhealing-deploy/SKILL.md` for go-live and rollback.
+
 ## Change Patterns
 
 For content/text edits:

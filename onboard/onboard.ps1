@@ -110,9 +110,16 @@ function Install-WingetApp {
     if ($code -ne 0) {
         Write-Log "$Label winget exit code: $code"
     }
-    # For apps without a CLI probe (Codex App), we can't verify; trust winget.
+    # For apps without a CLI probe (Codex App), we cannot verify via a command.
+    # Only claim success on a clean exit; otherwise warn and keep going.
     if (-not $ProbeCmd) {
-        Say "$Label install requested (winget exit code $code)." "Green"
+        if ($code -eq 0) {
+            Say "$Label installed." "Green"
+        }
+        else {
+            Say "$Label may not have installed automatically (code $code)." "Yellow"
+            Say "No problem - you can install '$Label' later from the Microsoft Store. The Codex command-line tool (next step) is enough to continue." "Yellow"
+        }
         return
     }
     Fail-Friendly "installing $Label" "winget exit $code; '$ProbeCmd' still not found"
@@ -235,6 +242,17 @@ try {
     }
     else {
         Say "Health check passed." "Green"
+    }
+
+    # Packaging check: 'check' can pass while a static build fails (prerender /
+    # adapter / asset issues). Surface that here, not later at deploy time.
+    Say "Packaging the website (final check) ..."
+    & npm run build 2>&1 | ForEach-Object { Write-Log "build: $_" }
+    if ($LASTEXITCODE -ne 0) {
+        Say "The packaging step reported issues - the onboarding assistant will help sort these out." "Yellow"
+    }
+    else {
+        Say "Packaging check passed." "Green"
     }
 }
 finally {

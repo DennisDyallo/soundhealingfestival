@@ -18,6 +18,7 @@ This repo is operated by Mateusz, a non-technical product owner, through Codex. 
 4. State assumptions before implementation when the request leaves business facts unclear.
 5. Keep edits scoped to the requested outcome. Do not refactor generated Wix snapshot content unless the task is specifically about migration or ingestion.
 6. At closeout, report files changed, user-visible result, checks run, request-log status, and rollback reference.
+7. Publishing is gated on push access (trunk-based). If `git remote -v` has no `origin`, the project is pre-go-live: keep changes local, do not push. If `origin` is the shared repo and `git config --get credential.helper` contains `manager`, publish approved changes by committing to `main` and pushing (the host auto-deploys). Never use Personal Access Tokens or SSH keys. See `.codex/skills/soundhealing-deploy/SKILL.md`.
 
 ## Content Consistency
 

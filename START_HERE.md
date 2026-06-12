@@ -2,6 +2,15 @@
 
 This repo is set up so Mateusz can ask Codex for website changes in plain English.
 
+## First-Time Setup (do this once)
+
+1. Double-click `Onboard-Soundhealing.cmd` (Dennis will send it to you).
+2. If Windows shows a blue "Windows protected your PC" box, click **More info**, then **Run anyway**.
+3. Wait a few minutes while it installs everything and downloads the website.
+4. When a window opens, type **`onboard me`** and press Enter.
+
+That's it. The assistant takes over from there and walks you through the rest.
+
 ## Daily Workflow
 
 1. Open Codex in this repo.

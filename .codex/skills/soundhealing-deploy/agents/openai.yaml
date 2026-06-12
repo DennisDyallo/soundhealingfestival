@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deploy My Site"
+  short_description: "Go-live wizard: connect a host and publish"
+  default_prompt: "Use $soundhealing-deploy to take my website live, step by step."

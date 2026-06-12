@@ -2,6 +2,12 @@
 
 This repo is operated by Mateusz, a non-technical product owner, through Codex. Default to owner-safe execution: make small scoped changes, preserve the live site unless asked otherwise, and return clear validation evidence.
 
+## Request Routing
+
+- "onboard me" / "get me started" / first-time use -> `.codex/skills/soundhealing-onboarding/SKILL.md`
+- "deploy my site" / "go live" / "publish" -> `.codex/skills/soundhealing-deploy/SKILL.md`
+- routine website change requests -> `.codex/skills/soundhealing-owner-ops/SKILL.md`
+
 ## Default Workflow
 
 1. Read `START_HERE.md` for the owner-facing workflow.

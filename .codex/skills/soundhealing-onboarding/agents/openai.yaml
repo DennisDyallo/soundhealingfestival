@@ -1,0 +1,4 @@
+interface:
+  display_name: "Onboard Me"
+  short_description: "First-time setup walkthrough for Mateusz"
+  default_prompt: "Use $soundhealing-onboarding to walk me through getting started for the first time."

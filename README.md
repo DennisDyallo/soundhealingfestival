@@ -4,6 +4,14 @@
 
 Start here: `START_HERE.md`
 
+### First-time setup (Windows, one click)
+
+1. Double-click `Onboard-Soundhealing.cmd`.
+2. If Windows shows "Windows protected your PC", click **More info → Run anyway**.
+3. When a window opens at the end, type `onboard me` and press Enter.
+
+The script installs Git, Node, the Codex app, and the Codex CLI, downloads this repo, and hands off to the `soundhealing-onboarding` skill. Going live later is handled by the `soundhealing-deploy` skill (just say `deploy my site`).
+
 Daily workflow:
 
 1. Open Codex in this repo.

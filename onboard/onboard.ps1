@@ -57,8 +57,18 @@ function Fail-Friendly {
     Write-Host ""
     Say "Something stopped during: $What" "Red"
     if ($Detail) { Say "Technical detail (for Dennis): $Detail" "DarkYellow" }
+    # Show the last few log lines so the screenshot is actionable for Dennis.
+    if (Test-Path $logPath) {
+        $tail = Get-Content -Path $logPath -Tail 15 -ErrorAction SilentlyContinue
+        if ($tail) {
+            Write-Host ""
+            Write-Host "Last few log lines (for Dennis):" -ForegroundColor DarkYellow
+            $tail | ForEach-Object { Write-Host "  $_" -ForegroundColor DarkGray }
+        }
+    }
+    Write-Host ""
     Say "What to do: take a screenshot of this window and send it to Dennis." "Yellow"
-    Say "Nothing on your computer was harmed. You can safely run this again later." "Yellow"
+    Say "Nothing on your computer was harmed. You can safely run this again - it picks up where it left off." "Yellow"
     Say "Full log saved at: $logPath" "Yellow"
     Write-Host ""
     Read-Host "Press Enter to close"
@@ -68,6 +78,14 @@ function Fail-Friendly {
 function Test-Command {
     param([string]$Name)
     return [bool](Get-Command $Name -ErrorAction SilentlyContinue)
+}
+
+# True only when $dir is a real, usable git working tree (not a half-cloned folder).
+function Test-GitRepo {
+    param([string]$Dir)
+    if (-not (Test-Path (Join-Path $Dir ".git"))) { return $false }
+    & git -C $Dir rev-parse --is-inside-work-tree 2>$null | Out-Null
+    return ($LASTEXITCODE -eq 0)
 }
 
 # Refresh PATH inside this session so freshly-installed tools are found.
@@ -98,28 +116,48 @@ function Install-WingetApp {
         "--exact", "--silent",
         "--accept-package-agreements", "--accept-source-agreements"
     )
-    & winget @wingetArgs 2>&1 | ForEach-Object { Write-Log "winget: $_" }
-
-    # winget returns non-zero for some benign states (already installed / no upgrade).
+    # Capture output so we can recognize benign "already installed" states, and log it.
+    $output = & winget @wingetArgs 2>&1 | ForEach-Object { Write-Log "winget: $_"; $_ }
     $code = $LASTEXITCODE
+    $outText = ($output | Out-String)
+
+    # winget returns non-zero for several harmless states. Treat these as success.
+    $benign = $false
+    foreach ($marker in @(
+            "already installed",
+            "No available upgrade",
+            "No newer package versions",
+            "No applicable upgrade",
+            "found an existing package")) {
+        if ($outText -match [regex]::Escape($marker)) { $benign = $true; break }
+    }
+
     Update-SessionPath
+
+    # Best signal: the command now exists.
     if ($ProbeCmd -and (Test-Command $ProbeCmd)) {
-        Say "$Label installed." "Green"
+        Say "$Label is ready." "Green"
         return
     }
-    if ($code -ne 0) {
-        Write-Log "$Label winget exit code: $code"
-    }
-    # For apps without a CLI probe (Codex App), we cannot verify via a command.
-    # Only claim success on a clean exit; otherwise warn and keep going.
+
+    if ($code -ne 0) { Write-Log "$Label winget exit code: $code" }
+
+    # No CLI probe (e.g. the Codex desktop app): rely on exit code / benign markers.
     if (-not $ProbeCmd) {
-        if ($code -eq 0) {
-            Say "$Label installed." "Green"
+        if ($code -eq 0 -or $benign) {
+            Say "$Label is installed and up to date." "Green"
         }
         else {
-            Say "$Label may not have installed automatically (code $code)." "Yellow"
+            Say "$Label could not be installed automatically right now (code $code)." "Yellow"
             Say "No problem - you can install '$Label' later from the Microsoft Store. The Codex command-line tool (next step) is enough to continue." "Yellow"
         }
+        return
+    }
+
+    # Has a probe but still not found. If winget reported a benign state, the tool may
+    # just need a new window for PATH; don't hard-fail on that.
+    if ($benign) {
+        Say "$Label is installed (it will be ready next time a window opens)." "Yellow"
         return
     }
     Fail-Friendly "installing $Label" "winget exit $code; '$ProbeCmd' still not found"
@@ -134,6 +172,11 @@ Write-Host "==========================================================" -Foregro
 Write-Host "   Sound Healing Festival Stockholm - website onboarding" -ForegroundColor Magenta
 Write-Host "==========================================================" -ForegroundColor Magenta
 Say "Hi Mateusz! This sets up everything you need. Sit back - it takes a few minutes." "White"
+Write-Host ""
+Say "Two things to know:" "White"
+Say "  1. This is SAFE to run as many times as you like - it skips whatever is already done." "White"
+Say "  2. Some steps are quiet for up to a minute. If it looks frozen, it is still working -" "White"
+Say "     please do NOT close this window." "White"
 Say "Log file: $logPath" "DarkGray"
 
 # 1) Preflight: Windows + winget
@@ -159,6 +202,8 @@ Install-WingetApp -Label "Node.js (LTS)" -ProbeCmd "node" -WingetId "OpenJS.Node
 # 3) Codex surfaces
 Step "Installing Codex (your AI assistant)"
 # Codex desktop app from the Microsoft Store (no CLI probe available -> trust winget).
+Say "Installing the Codex app from the Microsoft Store." "White"
+Say "This is the slowest step and can be quiet for up to a minute - please wait, it is working." "Yellow"
 Install-WingetApp -Label "Codex app" -ProbeCmd "" -WingetId "9PLM9XGG6VKS" -Source "msstore"
 
 # Codex command-line tool (official installer).
@@ -195,27 +240,65 @@ if ($RepoUrl -match "OWNER/REPO") {
     Fail-Friendly "downloading the website" "RepoUrl placeholder not set (DENNIS: set -RepoUrl)"
 }
 
-if (Test-Path (Join-Path $TargetDir ".git")) {
-    Say "Website folder already exists - updating it instead." "Green"
-    try {
-        & git -C $TargetDir pull --ff-only 2>&1 | ForEach-Object { Write-Log "git: $_" }
+# Clone fresh into a temp folder, then move it into place. This way an interrupted
+# clone can never leave a broken folder that blocks the next run.
+function Invoke-FreshClone {
+    param([string]$Dest)
+
+    $tmp = "$Dest.tmp-clone"
+    if (Test-Path $tmp) {
+        Write-Log "Removing stale temp clone: $tmp"
+        Remove-Item -Recurse -Force $tmp -ErrorAction SilentlyContinue
     }
-    catch {
-        Say "Could not auto-update (that's OK, your local copy is kept)." "Yellow"
-        Write-Log "git pull failed: $($_.Exception.Message)"
+
+    $attempts = 0
+    while ($attempts -lt 2) {
+        $attempts++
+        Say "Downloading the website... (this is usually quick; please wait)" "White"
+        & git clone --progress --branch $Branch --single-branch $RepoUrl $tmp 2>&1 |
+            ForEach-Object { Write-Host "  $_" -ForegroundColor DarkGray; Write-Log "git: $_" }
+        $cloneCode = $LASTEXITCODE
+
+        if ($cloneCode -eq 0 -and (Test-Path (Join-Path $tmp ".git"))) {
+            Move-Item -Path $tmp -Destination $Dest
+            return
+        }
+
+        Write-Log "clone attempt $attempts failed (exit $cloneCode)"
+        if (Test-Path $tmp) { Remove-Item -Recurse -Force $tmp -ErrorAction SilentlyContinue }
+        if ($attempts -lt 2) {
+            Say "That download did not complete - trying once more..." "Yellow"
+            Start-Sleep -Seconds 3
+        }
+    }
+    Fail-Friendly "downloading the website" "git clone failed after 2 attempts (last exit $cloneCode)"
+}
+
+if (Test-GitRepo $TargetDir) {
+    # Valid existing copy -> update it. Never delete; he may have local work.
+    Say "Website folder already exists - updating it instead." "Green"
+    & git -C $TargetDir pull --ff-only 2>&1 | ForEach-Object { Write-Log "git: $_" }
+    if ($LASTEXITCODE -ne 0) {
+        Say "Could not auto-update (that's OK - your local copy is kept as-is)." "Yellow"
+        Write-Log "git pull non-zero exit: $LASTEXITCODE"
+    }
+    else {
+        Say "Website is up to date." "Green"
     }
 }
 else {
-    Say "Saving the website to: $TargetDir"
-    try {
-        & git clone --branch $Branch --single-branch $RepoUrl $TargetDir 2>&1 | ForEach-Object { Write-Log "git: $_" }
-        if (-not (Test-Path (Join-Path $TargetDir ".git"))) {
-            Fail-Friendly "downloading the website" "clone finished but .git missing"
+    if (Test-Path $TargetDir) {
+        # Folder exists but is not a valid repo (e.g. a cancelled earlier run).
+        # It holds no real work yet, so clean it and start fresh.
+        Say "Found an incomplete earlier copy - cleaning it up and starting fresh." "Yellow"
+        Write-Log "Removing incomplete target: $TargetDir"
+        Remove-Item -Recurse -Force $TargetDir -ErrorAction SilentlyContinue
+        if (Test-Path $TargetDir) {
+            Fail-Friendly "downloading the website" "could not remove incomplete folder $TargetDir (is a window or editor open in it?)"
         }
     }
-    catch {
-        Fail-Friendly "downloading the website" $_.Exception.Message
-    }
+    Say "Saving the website to: $TargetDir"
+    Invoke-FreshClone -Dest $TargetDir
     Say "Website downloaded." "Green"
 }
 
